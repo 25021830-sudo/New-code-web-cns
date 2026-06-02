@@ -2,48 +2,43 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài 1 - Hệ thống máy tính & Quản lý tệp tin</title>
+    <title>Quản trị Hệ thống - Gia Khánh</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1e40af; --secondary: #3b82f6; --bg-color: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-color); color: var(--text-main); padding: 40px 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; }
-        .back-btn { display: inline-block; margin-bottom: 25px; text-decoration: none; color: var(--secondary); font-weight: 700; font-size: 0.95rem; }
-        h1 { color: var(--primary); font-size: 2.2rem; font-weight: 800; margin-bottom: 25px; }
-        .grid-info { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
-        .info-card { background: #f8fafc; padding: 25px; border-radius: 12px; border-left: 5px solid var(--secondary); }
-        .info-card h3 { margin-bottom: 12px; color: var(--primary); font-size: 1.1rem; }
-        .info-card ul { list-style-position: inside; padding-left: 5px; color: var(--text-muted); font-size: 0.9rem; }
-        .info-card ul li { margin-bottom: 6px; }
-        iframe { width: 100%; height: 650px; border: 1px solid #e2e8f0; border-radius: 12px; margin-top: 20px; }
+        /* CSS riêng cho Banner trang con */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; margin: 0; }
+        .page-header { background: linear-gradient(135deg, #0f172a, #1e293b); padding: 80px 20px; text-align: center; color: white; border-bottom: 5px solid #2563eb; }
+        .page-header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 15px; }
+        .page-header p { font-size: 1.1rem; color: #94a3b8; max-width: 600px; margin: 0 auto; }
+        .content-wrap { max-width: 1000px; margin: -40px auto 50px; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); position: relative; z-index: 10; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+        .data-box { background: #f1f5f9; padding: 25px; border-radius: 12px; border-left: 4px solid #2563eb; }
+        .data-box h3 { color: #0f172a; margin-bottom: 10px; }
+        iframe { width: 100%; height: 700px; border: 1px solid #cbd5e1; border-radius: 12px; }
+        .nav-btn { display: inline-block; padding: 10px 20px; background: #e2e8f0; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: 700; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
-        <h1>Bài 1: Máy tính và các thiết bị ngoại vi</h1>
+    <div class="page-header">
+        <h1>Quản trị Hệ thống & Tệp tin</h1>
+        <p>Phân tích kiến trúc lưu trữ thư mục chuẩn hóa và kỹ năng thao tác hệ điều hành tối ưu.</p>
+    </div>
+
+    <div class="content-wrap">
+        <a href="index.html" class="nav-btn">← Trở về Tổng quan</a>
         
-        <div class="grid-info">
-            <div class="info-card">
-                <h3>Thao tác kỹ thuật lõi</h3>
-                <ul>
-                    <li>Sử dụng tổ hợp phím <code>Windows + E</code> khởi chạy File Explorer quản trị hệ thống.</li>
-                    <li>Khởi tạo cấu trúc cây thư mục phân tầng khoa học: <code>New Volume \ ThucHanh_TranMauGiaKhanh \ Tailieu</code>.</li>
-                    <li>Định hình chuẩn hóa quy tắc đặt tên file hệ thống không dấu, kết nối bằng dấu gạch dưới.</li>
-                </ul>
+        <div class="content-grid">
+            <div class="data-box">
+                <h3>Kiến trúc Thư mục</h3>
+                <p>Thiết lập thành công cây hệ thống <code>ThucHanh_TranMauGiaKhanh \ Tailieu</code>. Áp dụng nghiêm ngặt quy tắc định danh không dấu, sử dụng gạch dưới thay cho khoảng trắng để đảm bảo tính tương thích hệ thống.</p>
             </div>
-            <div class="info-card">
-                <h3>Quản lý vòng đời bộ nhớ</h3>
-                <ul>
-                    <li>Thực thi vòng lặp: Khởi tạo tệp tin <code>GhiChuQuanTrong.txt</code> ➔ Delete vào Recycle Bin.</li>
-                    <li>Làm chủ tính năng <code>Restore selected items</code> khôi phục tệp nguyên trạng về vùng nhớ ban đầu.</li>
-                    <li>Tối ưu hóa dung lượng ổ cứng thông qua việc làm sạch bộ nhớ tạm thời của Thùng rác.</li>
-                </ul>
+            <div class="data-box">
+                <h3>Quản trị Bộ nhớ</h3>
+                <p>Khởi tạo và thực thi quy trình khôi phục nguyên trạng tệp tin <code>GhiChuQuanTrong.txt</code> thông qua tính năng <i>Restore selected items</i> trong Recycle Bin.</p>
             </div>
         </div>
 
-        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Minh chứng báo cáo thực hành (PDF trực tiếp):</h3>
+        <h3 style="margin-bottom: 15px;">Báo cáo Giao diện Hệ thống (PDF):</h3>
         <iframe src="tuần 1.pdf"></iframe>
     </div>
 </body>
