@@ -7,47 +7,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a; --secondary: #2563eb; --accent: #38bdf8;
-            --bg-color: #f8fafc; --text-main: #1e293b; --text-muted: #64748b; --card-bg: #ffffff;
+            --primary: #0f172a; --secondary: #2563eb; --accent: #0ea5e9;
+            --bg-color: #f8fafc; --text-main: #1e293b; --text-muted: #475569; --card-bg: #ffffff;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        /* Fix lỗi dính chữ và margin cơ bản */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; 
+            background-color: var(--bg-color); color: var(--text-main); 
+            line-height: 1.75; /* Tăng khoảng cách dòng */
+            font-size: 16px;
+        }
+        p { margin-bottom: 15px; } /* Tách khoảng cách giữa các đoạn */
         
-        /* Navbar chuyên nghiệp */
-        header { background-color: var(--card-bg); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        header { background-color: var(--card-bg); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.05); flex-wrap: wrap; gap: 15px; }
         .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; }
         .logo span { color: var(--secondary); }
-        nav ul { list-style: none; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; padding: 8px 12px; border-radius: 8px; transition: all 0.3s; }
+        nav ul { list-style: none; display: flex; gap: 10px; flex-wrap: wrap; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; padding: 8px 15px; border-radius: 8px; transition: 0.3s; }
         nav a:hover, nav a.active { color: var(--secondary); background: #eff6ff; }
         
-        /* Hero Section */
-        .hero { display: flex; align-items: center; justify-content: center; gap: 60px; padding: 100px 20px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
-        .avatar-wrapper { position: relative; width: 280px; height: 280px; border-radius: 50%; padding: 8px; background: linear-gradient(135deg, var(--accent), var(--secondary)); animation: pulse-border 3s infinite; }
+        .hero { display: flex; align-items: center; justify-content: center; gap: 50px; padding: 80px 20px; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
+        .avatar-wrapper { position: relative; width: 280px; height: 280px; border-radius: 50%; padding: 8px; background: linear-gradient(135deg, var(--accent), var(--secondary)); }
         .avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 6px solid white; }
-        @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); } 70% { box-shadow: 0 0 0 25px rgba(37, 99, 235, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); } }
         
         .hero-content { max-width: 600px; }
-        .badge { display: inline-block; background: #1e293b; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; margin-bottom: 20px; letter-spacing: 1px; }
-        .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: var(--primary); }
-        .hero-title span { background: linear-gradient(90deg, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .badge { display: inline-block; background: #1e293b; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; margin-bottom: 20px; }
+        .hero-title { font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; color: var(--primary); }
         
-        .info-box { background: white; padding: 25px; border-radius: 16px; display: flex; gap: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; margin-bottom: 20px; }
+        .info-box { background: white; padding: 25px; border-radius: 12px; display: flex; flex-wrap: wrap; gap: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; margin-bottom: 20px; }
         .info-item { display: flex; flex-direction: column; }
-        .info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .info-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
         .info-value { font-weight: 800; color: var(--primary); font-size: 1.1rem; }
         
-        /* Lưới dự án */
-        .projects { max-width: 1300px; margin: 0 auto; padding: 60px 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .card { background: var(--card-bg); border-radius: 20px; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; transition: transform 0.4s; position: relative; overflow: hidden; }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--secondary), var(--accent)); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
-        .card:hover::before { transform: scaleX(1); }
-        .card-icon { width: 55px; height: 55px; background: #f1f5f9; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; color: var(--secondary); }
-        .card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: var(--primary); }
-        .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; }
-        .card-link { display: inline-flex; align-items: center; gap: 8px; color: var(--card-bg); background: var(--primary); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: background 0.3s; }
+        .projects { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; transition: 0.3s; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        .card-icon { width: 50px; height: 50px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        .card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 15px; color: var(--primary); line-height: 1.4; }
+        .card p { flex-grow: 1; color: var(--text-muted); }
+        .card-link { display: inline-block; text-align: center; background: var(--primary); color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 20px; transition: 0.3s; }
         .card-link:hover { background: var(--secondary); }
     </style>
 </head>
@@ -57,29 +57,29 @@
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Tổng quan</a></li>
-                <li><a href="bai1.html">Quản trị Hệ thống</a></li>
-                <li><a href="bai2.html">Mật mã ECC (IoT)</a></li>
+                <li><a href="bai1.html">Hệ thống</a></li>
+                <li><a href="bai2.html">Mật mã ECC</a></li>
                 <li><a href="bai3.html">Kỹ nghệ Prompt</a></li>
-                <li><a href="bai4.html">Cộng tác Đám mây</a></li>
-                <li><a href="bai5.html">Sáng tạo GenAI</a></li>
-                <li><a href="bai6.html">Liêm chính Học thuật</a></li>
+                <li><a href="bai4.html">Cộng tác số</a></li>
+                <li><a href="bai5.html">GenAI</a></li>
+                <li><a href="bai6.html">Liêm chính AI</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
         <div class="avatar-wrapper">
-            <img src="image_59833f.jpg" alt="Trần Mẫu Gia Khánh" class="avatar-img">
+            <img src="ảnh mặt.jpg" alt="Trần Mẫu Gia Khánh" class="avatar-img">
         </div>
         <div class="hero-content">
-            <div class="badge">Hệ thống Lưu trữ Khoa học VNU1001</div>
-            <h1 class="hero-title">Trần Mẫu <br><span>Gia Khánh</span></h1>
+            <div class="badge">Học phần VNU1001</div>
+            <h1 class="hero-title">Trần Mẫu Gia Khánh</h1>
             <div class="info-box">
                 <div class="info-item"><span class="info-label">MSSV</span><span class="info-value">25021830</span></div>
                 <div class="info-item"><span class="info-label">Lớp</span><span class="info-value">K70I - CS4</span></div>
-                <div class="info-item"><span class="info-label">Đơn vị</span><span class="info-value">UET - ĐHQGHN</span></div>
+                <div class="info-item"><span class="info-label">Đơn vị</span><span class="info-value">Khoa học máy tính - UET</span></div>
             </div>
-            <p style="color: var(--text-muted); font-size: 1.05rem;">Không gian lưu trữ các nghiên cứu ứng dụng thực tiễn về Công nghệ số và Trí tuệ nhân tạo. Thiết lập tiêu chuẩn làm việc chuyên nghiệp, minh bạch và có trách nhiệm.</p>
+            <p>Không gian lưu trữ khoa học trực tuyến môn Nhập môn Công nghệ số. Hệ thống minh chứng năng lực khai thác dữ liệu, tối ưu hóa công cụ AI và thực thi chuẩn mực liêm chính học thuật.</p>
         </div>
     </section>
 
@@ -87,39 +87,39 @@
         <div class="grid">
             <div class="card">
                 <div class="card-icon">💻</div>
-                <h3>Quản trị Hệ thống & Tệp tin</h3>
-                <p>Nghiên cứu kiến trúc tổ chức dữ liệu thư mục tiêu chuẩn, kiểm soát vòng đời tệp tin và làm chủ hệ điều hành Windows.</p>
-                <a href="bai1.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <h3>Quản trị Hệ thống</h3>
+                <p>Khởi tạo cây thư mục chuẩn hóa và làm chủ vòng đời bộ nhớ tạm thời trên hệ điều hành Windows.</p>
+                <a href="bai1.html" class="card-link">Xem chi tiết ➔</a>
             </div>
             <div class="card">
                 <div class="card-icon">🔐</div>
                 <h3>Nghiên cứu Mật mã ECC</h3>
-                <p>Khai thác tri thức bằng AI (Elicit/Consensus) đánh giá ứng dụng bảo mật đường cong Elliptic cho thiết bị IoT vi điều khiển.</p>
-                <a href="bai2.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Khảo sát hiệu năng thuật toán mã hóa đường cong Elliptic ứng dụng trên thiết bị IoT vi điều khiển.</p>
+                <a href="bai2.html" class="card-link">Xem chi tiết ➔</a>
             </div>
             <div class="card">
                 <div class="card-icon">⚙️</div>
                 <h3>Kỹ nghệ Prompt Engineering</h3>
-                <p>Phân tích hiệu năng truy xuất mô hình ngôn ngữ lớn (LLM) qua 3 cấp độ: Cơ bản - Cải tiến - Nâng cao (Few-shot, Role).</p>
-                <a href="bai3.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Tối ưu hóa câu lệnh AI qua 3 cấp độ, ứng dụng phân tích chuyên sâu Thuyết tương đối hẹp.</p>
+                <a href="bai3.html" class="card-link">Xem chi tiết ➔</a>
             </div>
             <div class="card">
                 <div class="card-icon">☁️</div>
-                <h3>Không gian Cộng tác Đám mây</h3>
-                <p>Kiến trúc quản trị dự án số hóa cho Lớp Triết 33 (Nhóm 1) qua hệ sinh thái Google Workspace, Miro và Canva.</p>
-                <a href="bai4.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <h3>Cộng tác Không gian số</h3>
+                <p>Điều phối dự án bài tập nhóm Triết 33 qua hệ sinh thái Google Drive, Docs, Sheets và Miro.</p>
+                <a href="bai4.html" class="card-link">Xem chi tiết ➔</a>
             </div>
             <div class="card">
                 <div class="card-icon">🎨</div>
-                <h3>Sáng tạo Đa phương tiện GenAI</h3>
-                <p>Thiết kế chiến dịch truyền thông "Hội An Xanh". Ứng dụng phối hợp bộ ba công cụ: Google Gemini, Adobe Firefly và Canva AI.</p>
-                <a href="bai5.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <h3>Sáng tạo Đa phương tiện</h3>
+                <p>Dự án Infographic "Hội An Xanh", phối hợp quy trình làm việc giữa Gemini, Adobe Firefly và Canva AI.</p>
+                <a href="bai5.html" class="card-link">Xem chi tiết ➔</a>
             </div>
             <div class="card">
                 <div class="card-icon">⚖️</div>
                 <h3>Liêm chính Học thuật AI</h3>
-                <p>Thiết lập cẩm nang 6 nguyên tắc đạo đức cốt lõi khi sử dụng AI tại UET, đảm bảo tính minh bạch và tư duy phản biện độc lập.</p>
-                <a href="bai6.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Bộ cẩm nang UET Ethics, quy định ranh giới và 6 nguyên tắc cốt lõi khi tương tác với Trí tuệ nhân tạo.</p>
+                <a href="bai6.html" class="card-link">Xem chi tiết ➔</a>
             </div>
         </div>
     </section>

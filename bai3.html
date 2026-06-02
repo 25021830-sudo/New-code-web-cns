@@ -2,29 +2,36 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Kỹ nghệ Prompt - Gia Khánh</title>
-    </head>
+    <title>Bài 3: Kỹ nghệ Prompt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style> /* COPY NGUYÊN CSS TỪ BÀI 1 XUỐNG ĐÂY */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.8; }
+        .page-header { background: #0f172a; padding: 60px 20px; text-align: center; color: white; border-bottom: 5px solid #2563eb; }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 15px; }
+        .content-wrap { max-width: 900px; margin: -30px auto 50px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .nav-btn { display: inline-block; padding: 10px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: 700; margin-bottom: 30px; }
+        h3 { color: #2563eb; margin: 25px 0 15px; font-size: 1.3rem; }
+        p, li { margin-bottom: 12px; color: #475569; }
+        ul { padding-left: 20px; margin-bottom: 20px; }
+        iframe { width: 100%; height: 750px; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 15px; }
+    </style>
+</head>
 <body>
     <div class="page-header">
         <h1>Tối ưu hóa Kỹ nghệ Prompt</h1>
-        <p>Làm chủ ngôn ngữ giao tiếp với AI qua các mô hình cấu trúc lệnh chuyên sâu.</p>
     </div>
-
     <div class="content-wrap">
-        <a href="index.html" class="nav-btn">← Trở về Tổng quan</a>
+        <a href="index.html" class="nav-btn">← Trở về Trang chủ</a>
         
-        <div class="content-grid">
-            <div class="data-box" style="grid-column: span 2;">
-                <h3>Khung tư duy 3 cấp độ (Phân tích Thuyết tương đối hẹp)</h3>
-                <ul style="padding-left: 20px; margin-top: 10px; line-height: 1.8;">
-                    <li><strong>Prompt Cơ bản:</strong> Câu lệnh thô ("Tóm tắt bài viết này"). Kết quả: Đầu ra lộn xộn, thiếu hệ thống.</li>
-                    <li><strong>Prompt Cải tiến:</strong> Bổ sung ràng buộc định dạng (Gạch đầu dòng). Kết quả: Dễ đọc hơn nhưng thiếu chiều sâu khoa học.</li>
-                    <li><strong>Prompt Nâng cao (Role + Few-shot):</strong> Đóng vai chuyên gia Vật lý lý thuyết, sử dụng khung 5W1H và Chain-of-Thought. Kết quả: Khắc phục hoàn toàn lỗi ảo giác (Hallucination), cấu trúc dạng bảng chuẩn mực.</li>
-                </ul>
-            </div>
-        </div>
+        <h3>Khung phân tích 3 cấp độ (Chủ đề: Thuyết tương đối hẹp)</h3>
+        <ul>
+            <li><strong>Cấp độ 1 (Cơ bản):</strong> Câu lệnh thô (VD: "Tóm tắt bài viết"). AI trả về đoạn văn dài, lộn xộn, dễ bỏ sót thuật ngữ lõi.</li>
+            <li><strong>Cấp độ 2 (Cải tiến):</strong> Bổ sung ràng buộc về định dạng (VD: Yêu cầu gạch đầu dòng). Kết quả trực quan hơn nhưng nội dung phân tích vẫn thiếu chiều sâu khoa học.</li>
+            <li><strong>Cấp độ 3 (Nâng cao):</strong> Áp dụng tổ hợp kỹ thuật: <i>Role Prompting</i> (Đóng vai chuyên gia Vật lý), <i>Context</i> (Giới hạn kiến thức), <i>Few-shot</i> (Cung cấp mẫu output dạng bảng). Kết quả: Trích xuất hoàn hảo, loại bỏ triệt để hiện tượng Ảo giác (Hallucination) của mô hình.</li>
+        </ul>
 
-        <h3 style="margin-bottom: 15px;">Báo cáo Phân tích Lệnh (PDF):</h3>
+        <h3>Báo cáo Kỹ thuật Viết Lệnh (PDF):</h3>
         <iframe src="Tuần 3.pdf"></iframe>
     </div>
 </body>
