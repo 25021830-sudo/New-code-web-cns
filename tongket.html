@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng kết - Khánh's Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0f172a;       
+            --secondary: #2563eb;     
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--text-main);
+            line-height: 1.8;
+            /* Pattern chấm bi background giống hệt mẫu */
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+            background-size: 25px 25px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--secondary); text-decoration: none; }
+        
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; padding-bottom: 5px; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--secondary); border-bottom: 2px solid var(--secondary); }
+
+        /* --- MAIN SUMMARY CONTENT --- */
+        .summary-container {
+            max-width: 850px;
+            margin: 140px auto 100px;
+            padding: 0 20px;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header-title h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Thẻ kết luận */
+        .summary-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid #f1f5f9;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .icon-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .icon-blue { background: #0ea5e9; }
+        .icon-red { background: linear-gradient(135deg, #f43f5e, #ea580c); }
+
+        .summary-card h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .summary-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .summary-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        strong { color: var(--text-main); font-weight: 700; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Khánh's Portfolio</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Giới thiệu</a></li>
+                <li><a href="index.html#projects">Dự án & Nghiên cứu</a></li>
+                <li><a href="tongket.html" class="active">Tổng kết</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="summary-container">
+        <div class="header-title">
+            <h1>Tổng Kết Hành Trình</h1>
+            <p>Chiêm nghiệm cá nhân từ học phần Công nghệ số (VNU1001)</p>
+        </div>
+
+        <div class="summary-card">
+            <div class="card-header">
+                <div class="icon-circle icon-blue">💡</div>
+                <h2>Bài Học & Điểm Tâm Đắc Nhất</h2>
+            </div>
+            <p>Sự chuyển đổi lớn nhất của tôi là về mặt tư duy cốt lõi: <strong>AI không phải là công cụ làm hộ, mà là một "Tổng biên tập"</strong>.</p>
+            <p>Nhờ biết phân bổ công việc phối hợp cùng AI, tôi đã giải phóng bản thân khỏi các tác vụ thủ công lặp đi lặp lại, tiết kiệm đến <strong>60% thời gian</strong>. Quỹ thời gian quý báu này được tái đầu tư toàn bộ vào các kỹ năng bậc cao: thiết kế kiến trúc hệ thống, phân tích thuật toán sâu sắc và phát triển tư duy phản biện độc bản.</p>
+        </div>
+
+        <div class="summary-card">
+            <div class="card-header">
+                <div class="icon-circle icon-red"></div>
+                <h2>Thách Thức Kỹ Thuật & Đạo Đức</h2>
+            </div>
+            <p>Trong quá trình sử dụng mô hình ngôn ngữ lớn (LLM), khó khăn lớn nhất tôi gặp phải là việc xử lý hiện tượng <strong>"Ảo giác số liệu" (Hallucination)</strong> và tính rập khuôn văn hóa của AI. AI có thể đưa ra các nguồn học thuật rất tự tin nhưng hoàn toàn là bịa đặt.</p>
+            <p>Để khắc phục, tôi đã phải thiết lập quy trình kiểm chứng chéo khắt khe 100% đối với tài liệu, đảm bảo tính nguyên bản và bảo vệ tính liêm chính học thuật trong mọi ấn phẩm khoa học.</p>
+        </div>
+    </div>
+
+</body>
+</html>
