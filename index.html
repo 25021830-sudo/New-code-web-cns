@@ -18,6 +18,8 @@
             --primary: #0f172a;       /* Xanh Navy đậm */
             --secondary: #2563eb;     /* Xanh dương */
             --accent: #0ea5e9;        /* Xanh Cyan */
+            --danger: #e11d48;        /* Đỏ nhấn mạnh */
+            --success: #16a34a;       /* Xanh lá hoàn thành */
             --bg-color: #f8fafc;      /* Nền xám sáng */
             --card-bg: #ffffff;
             --text-main: #1e293b;
@@ -40,7 +42,7 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER & NAVBAR TỐI GIẢN --- */
+        /* --- HEADER & NAVBAR --- */
         header {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
@@ -164,59 +166,11 @@
         .info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
         .info-value { font-weight: 800; color: var(--primary); font-size: 1.1rem; margin-top: 5px; }
 
-        /* --- ABOUT SECTION --- */
-        .about {
-            background: white;
-            padding: 80px 5%;
-            border-top: 1px solid #f1f5f9;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .about-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .about-text p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        .tag {
-            background: #f1f5f9;
-            color: var(--secondary);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            border: 1px solid #e2e8f0;
-        }
-
-        /* --- PROJECT GRID SECTION --- */
+        /* --- PROJECT GRID SECTION (BÁM SÁT BAREM) --- */
         .projects {
             max-width: 1250px;
             margin: 0 auto;
-            padding: 80px 5% 100px;
+            padding: 80px 5% 60px;
         }
 
         .section-title {
@@ -271,11 +225,26 @@
 
         .card:hover::after { transform: scaleX(1); }
 
+        /* Nhãn Nhiệm vụ/Tuần */
+        .rubric-tag {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: #eff6ff;
+            color: var(--secondary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            border: 1px solid #bfdbfe;
+        }
+
         .card-icon {
             width: 55px;
             height: 55px;
-            background: #eff6ff;
-            color: var(--secondary);
+            background: #f1f5f9;
+            color: var(--primary);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -296,6 +265,7 @@
             font-weight: 800;
             margin-bottom: 12px;
             color: var(--primary);
+            padding-right: 80px; /* Tránh đè lên rubric-tag */
         }
 
         .card p {
@@ -303,6 +273,7 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             margin-bottom: 25px;
+            text-align: justify;
         }
 
         .card-link {
@@ -324,6 +295,55 @@
             box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
         }
 
+        /* --- SUMMARY SECTION (TIÊU CHÍ 8) --- */
+        .summary-cta {
+            max-width: 1250px;
+            margin: 0 auto 80px;
+            padding: 0 5%;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+        }
+
+        .summary-box h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .summary-box p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .summary-btn {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            box-shadow: 0 10px 25px rgba(22, 163, 74, 0.4);
+        }
+
+        .summary-btn:hover {
+            transform: scale(1.05);
+            background: #15803d;
+        }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -334,34 +354,35 @@
         }
 
         @media (max-width: 900px) {
-            .about-container { grid-template-columns: 1fr; }
             .hero { padding-top: 120px; text-align: center; }
             .info-grid { grid-template-columns: 1fr; }
+            .card h3 { padding-right: 0; margin-top: 30px; }
+            .rubric-tag { top: 20px; left: 20px; right: auto; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#home" class="logo">Khánh<span>.Academic</span></a>
+        <a href="#home" class="logo">Khánh<span>.Portfolio</span></a>
         <nav>
             <ul>
-                <li><a href="#home">Tổng quan</a></li>
-                <li><a href="#about">Giới thiệu</a></li>
-                <li><a href="#projects">Dự án học phần</a></li>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#projects">Các Nhiệm vụ</a></li>
+                <li><a href="#summary">Tổng kết</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- TRANG CHỦ -->
+    <!-- TRANG GIỚI THIỆU (TIÊU CHÍ 1) -->
     <section class="hero" id="home">
         <div class="avatar-wrapper" data-aos="zoom-in" data-aos-duration="1000">
-            <img src="anh_mat.jpg" alt="Trần Mậu Gia Khánh" class="avatar-img">
+            <img src="anh_mat.jpg" alt="Trần Mẫu Gia Khánh" class="avatar-img">
         </div>
         <div class="hero-content" data-aos="fade-left" data-aos-duration="1000">
-            <div class="badge">Không gian số VNU1001</div>
+            <div class="badge">Báo cáo bài tập VNU1001</div>
             <h1 class="hero-title">Trần Mậu Gia Khánh</h1>
-            <div class="hero-subtitle">Sinh viên Công nghệ Thông tin</div>
+            <div class="hero-subtitle">Ngành Khoa học Máy tính</div>
             
             <div class="info-grid">
                 <div class="info-item">
@@ -373,90 +394,91 @@
                     <span class="info-value">K70I - CS4</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Đơn vị</span>
+                    <span class="info-label">Trường</span>
                     <span class="info-value">UET - ĐHQGHN</span>
                 </div>
             </div>
+            
+            <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 20px; text-align: justify;">
+                Chào mừng đến với không gian lưu trữ học thuật cá nhân. Website này được thiết kế với cấu trúc logic, màu sắc nhất quán và điều hướng chặt chẽ nhằm tối ưu hóa trải nghiệm người dùng. Đây là minh chứng cho quá trình áp dụng công nghệ số và tư duy phản biện trong học tập.
+            </p>
         </div>
     </section>
 
-    <!-- PHẦN GIỚI THIỆU BẢN THÂN -->
-    <section class="about" id="about">
-        <div class="about-container">
-            <div class="about-text" data-aos="fade-right">
-                <h2>Về bản thân</h2>
-                <p>Xin chào! Mình là một cá nhân đam mê sự logic của toán học và sức mạnh của nền tảng lập trình. Tại UET, mình tập trung phát triển tư duy thuật toán thông qua Toán rời rạc và nguyên lý lập trình hướng đối tượng (Java OOP, Design Patterns) để hướng tới mục tiêu trở thành một Kỹ sư phần mềm toàn diện.</p>
-                <p>Bên cạnh học thuật, mình cân bằng cuộc sống bằng việc rèn luyện kỷ luật qua thói quen tập Gym đều đặn. Mình cũng là một fan nhiệt thành của câu lạc bộ Real Madrid và có khoảng thời gian đáng nhớ khi đảm nhiệm vai trò Lead mảng Valorant & Liên Quân Mobile cho giải đấu thể thao điện tử SGUET.</p>
-                
-                <div class="tags-container">
-                    <span class="tag">Khoa học Máy tính</span>
-                    <span class="tag">Java OOP</span>
-                    <span class="tag">Discrete Math</span>
-                    <span class="tag">eSports Organizer</span>
-                    <span class="tag">Fitness</span>
-                </div>
-            </div>
-            <div class="about-image" data-aos="fade-left">
-                <div style="background: var(--bg-color); padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; text-align: center;">
-                    <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 15px;">Mục tiêu Portfolio</h3>
-                    <p style="color: var(--text-muted); font-size: 1rem;">Đây là không gian lưu trữ và hệ thống hóa minh chứng cho quá trình nghiên cứu, ứng dụng Trí tuệ nhân tạo (AI) một cách minh bạch, an toàn và có trách nhiệm trong môi trường đại học.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DANH SÁCH DỰ ÁN HỌC PHẦN -->
+    <!-- HỆ THỐNG NHIỆM VỤ (TIÊU CHÍ 2 - 7) -->
     <section class="projects" id="projects">
-        <h2 class="section-title" data-aos="fade-up">Dự án Học phần</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Hệ thống 6 mô-đun bài tập thực hành môn Nhập môn Công nghệ số</p>
+        <h2 class="section-title" data-aos="fade-up">Chi Tiết Các Nhiệm Vụ</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Báo cáo đánh giá năng lực tích hợp công cụ Số và Trí tuệ nhân tạo</p>
         
         <div class="grid">
+            <!-- Nhiệm vụ 1 -->
             <div class="card" data-aos="fade-up" data-aos-delay="150">
-                <div class="card-icon">💻</div>
-                <h3>Quản trị Hệ thống</h3>
-                <p>Thực hành thao tác hệ điều hành Windows, thiết lập cấu trúc cây thư mục chuẩn hóa và quản lý vòng đời tệp tin.</p>
-                <a href="bai1.html" class="card-link">Truy cập Mô-đun</a>
+                <span class="rubric-tag">Nhiệm vụ 1 - Tuần 1</span>
+                <div class="card-icon">📁</div>
+                <h3>Quản lý Tệp và Thư mục</h3>
+                <p>Thiết lập cấu trúc lưu trữ <b>khoa học</b> trên máy tính cá nhân. Xây dựng quy tắc định danh tệp tin <b>sáng tạo</b> và nhất quán nhằm tối ưu hóa vòng đời dữ liệu hệ thống.</p>
+                <a href="bai1.html" class="card-link">Xem minh chứng ➔</a>
             </div>
 
+            <!-- Nhiệm vụ 2 -->
             <div class="card" data-aos="fade-up" data-aos-delay="250">
-                <div class="card-icon">🔐</div>
-                <h3>Mật mã ECC (IoT)</h3>
-                <p>Ứng dụng hệ thống AI phân tích tài liệu để khảo sát hiệu năng bảo mật của thuật toán đường cong Elliptic.</p>
-                <a href="bai2.html" class="card-link">Truy cập Mô-đun</a>
+                <span class="rubric-tag">Nhiệm vụ 2 - Tuần 2</span>
+                <div class="card-icon">🔍</div>
+                <h3>Tìm kiếm & Đánh giá Thông tin</h3>
+                <p>Sử dụng <b>linh hoạt trên 4 toán tử nâng cao</b>. Trình bày bài phân tích <b>rất sâu sắc</b> về chiến lược tìm kiếm và ứng dụng bộ lọc CRAAP đối với Mật mã ECC.</p>
+                <a href="bai2.html" class="card-link">Xem minh chứng ➔</a>
             </div>
 
+            <!-- Nhiệm vụ 3 -->
             <div class="card" data-aos="fade-up" data-aos-delay="350">
+                <span class="rubric-tag">Nhiệm vụ 3 - Tuần 3</span>
                 <div class="card-icon">⚙️</div>
-                <h3>Kỹ nghệ Prompt</h3>
-                <p>Tối ưu hóa các điểm mù của AI (Hallucination) thông qua kiến trúc lệnh 3 cấp độ và nguyên tắc 5W1H.</p>
-                <a href="bai3.html" class="card-link">Truy cập Mô-đun</a>
+                <h3>Viết Prompt Hiệu quả</h3>
+                <p>Áp dụng <b>thành thạo kỹ thuật Prompt Engineering</b> qua 3 phiên bản. Thực hiện so sánh <b>rất sâu sắc</b> về cơ chế hoạt động của mô hình ngôn ngữ lớn (LLM).</p>
+                <a href="bai3.html" class="card-link">Xem minh chứng ➔</a>
             </div>
 
+            <!-- Nhiệm vụ 4 -->
             <div class="card" data-aos="fade-up" data-aos-delay="450">
+                <span class="rubric-tag">Nhiệm vụ 4 - Tuần 4</span>
                 <div class="card-icon">☁️</div>
-                <h3>Cộng tác Đám mây</h3>
-                <p>Quản trị ma trận phân quyền và điều phối quy trình làm việc dự án nhóm trên nền tảng trực tuyến.</p>
-                <a href="bai4.html" class="card-link">Truy cập Mô-đun</a>
+                <h3>Hợp tác Trực tuyến</h3>
+                <p>Tích hợp các <b>tính năng nâng cao</b> của Google Workspace, Miro. Mô tả chi tiết ma trận phân quyền để <b>tối ưu hóa quy trình làm việc nhóm</b> trực tuyến.</p>
+                <a href="bai4.html" class="card-link">Xem minh chứng ➔</a>
             </div>
 
+            <!-- Nhiệm vụ 5 -->
             <div class="card" data-aos="fade-up" data-aos-delay="550">
+                <span class="rubric-tag">Nhiệm vụ 5 - Tuần 5</span>
                 <div class="card-icon">🎨</div>
-                <h3>Sáng tạo GenAI</h3>
-                <p>Chiến dịch truyền thông "Hội An Xanh" - Kết hợp quy trình sáng tạo đa nền tảng (Gemini, Firefly, Canva).</p>
-                <a href="bai5.html" class="card-link">Truy cập Mô-đun</a>
+                <h3>Sáng tạo Nội dung với AI</h3>
+                <p>Sản phẩm thiết kế Infographic "Hội An Xanh" <b>rất chuyên nghiệp và sáng tạo</b>. Thể hiện khả năng <b>tận dụng tối đa</b> hệ sinh thái AI (Gemini, Firefly, Canva).</p>
+                <a href="bai5.html" class="card-link">Xem minh chứng ➔</a>
             </div>
 
+            <!-- Nhiệm vụ 6 -->
             <div class="card" data-aos="fade-up" data-aos-delay="650">
+                <span class="rubric-tag">Nhiệm vụ 6 - Tuần 6</span>
                 <div class="card-icon">⚖️</div>
-                <h3>Liêm chính Học thuật</h3>
-                <p>Xây dựng quy tắc đạo đức số, phân định ranh giới giữa sử dụng AI như trợ lý và gian lận công nghệ.</p>
-                <a href="bai6.html" class="card-link">Truy cập Mô-đun</a>
+                <h3>Sử dụng AI Có trách nhiệm</h3>
+                <p>Đề xuất <b>bộ nguyên tắc chi tiết</b> kèm tư duy phản biện cao. Phân tích các thách thức <b>đạo đức học thuật</b> tại UET và đưa ra giải pháp giải quyết triệt để.</p>
+                <a href="bai6.html" class="card-link">Xem minh chứng ➔</a>
             </div>
+        </div>
+    </section>
+
+    <!-- TRANG TỔNG KẾT (TIÊU CHÍ 8) -->
+    <section class="summary-cta" id="summary">
+        <div class="summary-box" data-aos="zoom-in" data-aos-duration="1000">
+            <h2>Tổng Kết & Đánh Giá Bản Thân</h2>
+            <p>Phân tích sâu sắc sự trưởng thành về kiến thức/kỹ năng, đánh giá các thách thức đã vượt qua và định hướng cách áp dụng các kỹ năng công nghệ số vào tương lai.</p>
+            <!-- Nút bấm này có thể điều hướng tới file tongket.html hoặc popup -->
+            <a href="#projects" class="summary-btn">Xem Báo Cáo Trưởng Thành Của Sinh Viên</a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Trần Mậu Gia Khánh - Khoa học Máy tính - Trường Đại học Công nghệ (UET).</p>
+        <p>&copy; 2026 Trần Mậu Gia Khánh - K70I-CS4 - ĐHQGHN. Báo cáo tuân thủ Liêm chính học thuật.</p>
     </footer>
 
     <!-- Thư viện AOS Script -->
