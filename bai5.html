@@ -2,48 +2,396 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bài 5: Sáng tạo GenAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô-đun 5: Sáng tạo GenAI | Gia Khánh</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.8; }
-        .page-header { background: #0f172a; padding: 60px 20px; text-align: center; color: white; border-bottom: 5px solid #2563eb; }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 15px; }
-        .content-wrap { max-width: 900px; margin: -30px auto 50px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .nav-btn { display: inline-block; padding: 10px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: 700; margin-bottom: 30px; }
-        h3 { color: #2563eb; margin: 25px 0 15px; font-size: 1.3rem; }
-        p, li { margin-bottom: 12px; color: #475569; }
-        ul { padding-left: 20px; margin-bottom: 20px; }
-        iframe { width: 100%; height: 600px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 30px; }
-        .img-container { text-align: center; margin: 30px 0; }
-        .img-container img { max-width: 100%; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        :root {
+            --primary: #0f172a;       /* Xanh Navy đậm */
+            --secondary: #3b82f6;     /* Xanh dương */
+            --accent: #0ea5e9;        /* Xanh Cyan */
+            --bg-color: #f8fafc;      /* Nền xám sáng */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--secondary); }
+
+        nav ul { list-style: none; display: flex; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; padding: 8px 16px; border-radius: 8px; transition: var(--transition-smooth); }
+        nav a:hover, nav a.active { color: var(--secondary); background: #eff6ff; }
+
+        /* --- PAGE HEADER BANNER --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            padding: 140px 5% 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* --- CONTENT WRAPPER --- */
+        .content-container {
+            max-width: 1000px;
+            margin: -60px auto 80px;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #f1f5f9;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-btn:hover {
+            background: #e2e8f0;
+            transform: translateX(-5px);
+        }
+
+        /* --- STEP CARDS --- */
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--secondary);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .step-content ul {
+            padding-left: 25px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .step-content li {
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+            color: #1e3a8a;
+        }
+
+        /* Lưới 3 công cụ AI */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-item {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            text-align: center;
+        }
+
+        .tool-item h4 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        
+        .tool-1 h4 { color: #16a34a; } /* Màu Gemini */
+        .tool-2 h4 { color: #e11d48; } /* Màu Firefly */
+        .tool-3 h4 { color: #0ea5e9; } /* Màu Canva */
+
+        .tool-item p {
+            font-size: 0.9rem !important;
+            color: var(--text-muted);
+            margin-bottom: 0 !important;
+            text-align: left;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section {
+            margin: 40px 0;
+            text-align: center;
+            background: #0f172a;
+            padding: 40px 20px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .gallery-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gallery-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid #334155;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: var(--transition-smooth);
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.02);
+            border-color: var(--secondary);
+        }
+
+        /* --- PDF VIEWER --- */
+        .pdf-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .pdf-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 750px;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            transition: var(--transition-smooth);
+        }
+
+        iframe:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
     </style>
 </head>
 <body>
-    <div class="page-header">
-        <h1>Sáng tạo Đa phương tiện GenAI</h1>
-    </div>
-    <div class="content-wrap">
-        <a href="index.html" class="nav-btn">← Trở về Trang chủ</a>
-        
-        <h3>Chiến dịch: "Hội An Xanh - Hành trình bền vững"</h3>
-        <p>Quy trình sáng tạo là sự phối hợp nhịp nhàng giữa Tư duy con người và 3 công cụ AI tạo sinh (Generative AI):</p>
-        <ul>
-            <li><strong>Google Gemini (Lên kịch bản):</strong> Xây dựng khung nội dung tập trung vào 3 trụ cột: Môi trường xanh, Di sản Văn hóa, và Kinh tế địa phương. Số liệu rác thải nhựa được tra cứu chéo với báo cáo thực tế của Tỉnh Quảng Nam.</li>
-            <li><strong>Adobe Firefly (Tạo hình ảnh):</strong> Generate hình ảnh đèn lồng truyền thống mang bản sắc Việt Nam, đảm bảo tính hợp pháp về bản quyền dữ liệu.</li>
-            <li><strong>Canva AI (Thiết kế layout):</strong> Cấu trúc lại template "Bốn mùa", loại bỏ biểu đồ thừa và thiết kế lại luồng thông tin để làm nổi bật Call-to-Action (CTA): <i>"Giữ nét cổ kính, chọn cách đi xanh"</i>.</li>
-        </ul>
 
-        <h3>Ấn phẩm Thiết kế (PNG):</h3>
-        <div class="img-container">
-            <img src="tmphnsqp8_inforgraphic.png" alt="Infographic Hội An Xanh">
+    <header>
+        <a href="index.html" class="logo">Khánh<span>.Academic</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Tổng quan</a></li>
+                <li><a href="bai1.html">Tuần 1</a></li>
+                <li><a href="bai2.html">Tuần 2</a></li>
+                <li><a href="bai3.html">Tuần 3</a></li>
+                <li><a href="bai4.html">Tuần 4</a></li>
+                <li><a href="bai5.html" class="active">Tuần 5</a></li>
+                <li><a href="bai6.html">Tuần 6</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1 data-aos="fade-down" data-aos-duration="1000">Sáng tạo Đa phương tiện GenAI</h1>
+        <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Chiến dịch truyền thông "Hội An Xanh - Hành trình bền vững" và ứng dụng quy trình làm việc (Pipeline) liên kết 3 công cụ AI tạo sinh.</p>
+    </div>
+
+    <div class="content-container">
+        <a href="index.html" class="nav-btn" data-aos="fade-right">
+            <span>←</span> Trở về Trang Tổng quan
+        </a>
+
+        <div class="step-card" data-aos="fade-up">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Quy trình Sáng tạo Đa công cụ (GenAI Pipeline)</h2>
+            </div>
+            <div class="step-content">
+                <p>Mục tiêu của dự án là nâng cao nhận thức về du lịch bền vững cho giới trẻ, với thông điệp cốt lõi: <strong>"Giữ nét cổ kính, chọn cách đi xanh"</strong>. Để hoàn thiện ấn phẩm, mình đã phối hợp luồng dữ liệu qua 3 công cụ:</p>
+                
+                <div class="tools-grid">
+                    <div class="tool-item tool-1">
+                        <h4>1. Google Gemini</h4>
+                        <p>Lên khung nội dung bám sát 3 trụ cột (Môi trường, Văn hóa, Kinh tế). Chủ động loại bỏ số liệu rác và tra cứu chéo số liệu thực tế về rác thải nhựa tại Quảng Nam.</p>
+                    </div>
+                    <div class="tool-item tool-2">
+                        <h4>2. Adobe Firefly</h4>
+                        <p>Prompt tạo sinh hình ảnh đèn lồng mang bản sắc Việt. Được lựa chọn do đây là AI có đạo đức, dữ liệu đào tạo hoàn toàn hợp pháp về bản quyền.</p>
+                    </div>
+                    <div class="tool-item tool-3">
+                        <h4>3. Canva AI</h4>
+                        <p>Sử dụng mẫu "Bốn mùa", tái cấu trúc layout, loại bỏ bảng dữ liệu địa lý Tây phương không liên quan và làm nổi bật lời kêu gọi hành động (CTA).</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <h3>Bản đồ họa (PDF chất lượng cao):</h3>
-        <iframe src="hoi an- tuan 5.pdf"></iframe>
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Chuyển đổi Tư duy (Human-in-the-loop)</h2>
+            </div>
+            <div class="step-content">
+                <p>Bài tập thực hành minh chứng sự chuyển dịch trong tư duy của kỹ sư công nghệ:</p>
+                <div class="highlight-box">
+                    💡 <strong>Từ "Tự tay làm mọi thứ" sang "Giám sát & Tinh chỉnh"</strong><br>
+                    Thay vì mất cả ngày để vẽ tay một chiếc đèn lồng, mình chỉ mất <strong>5 phút</strong> để ra lệnh cho thuật toán sinh ảnh và <strong>30 phút</strong> để chỉnh sửa hoàn hảo. Phần lớn thời gian được giải phóng để tập trung vào việc <i>truyền tải thông điệp ý nghĩa</i> đến người xem.
+                </div>
+                <ul>
+                    <li><strong>Bảo vệ bản sắc:</strong> AI có xu hướng tạo ra ảnh đèn lồng mang phong cách Nhật Bản/Trung Quốc. Vai trò của con người là căn chỉnh Prompt để ép thuật toán bám sát nét giao thoa văn hóa đặc trưng của Hội An.</li>
+                    <li><strong>Tính minh bạch:</strong> Chủ động ghi chú rõ các phần có sự hỗ trợ của hệ thống AI tạo sinh (Generative AI) trên sản phẩm để tôn trọng sự thật và người xem.</li>
+                </ul>
+            </div>
+        </div>
 
-        <h3>Báo cáo Quy trình Sáng tạo (PDF):</h3>
-        <iframe src="Tuần 5.pdf"></iframe>
+        <div class="gallery-section" data-aos="zoom-in" data-aos-delay="200">
+            <div class="gallery-title">Tác phẩm Đồ họa: Hội An Xanh</div>
+            <img src="tmphnsqp8_inforgraphic.png" alt="Ấn phẩm Infographic Hội An Xanh" class="gallery-img">
+        </div>
+
+        <div class="pdf-section" data-aos="fade-up" data-aos-delay="300">
+            <h2 class="pdf-title">📄 Tư liệu Dự án (PDF)</h2>
+            
+            <p style="color: var(--text-muted); margin-bottom: 10px;"><strong>1. Bản số hóa Infographic gốc (Chất lượng cao):</strong></p>
+            <iframe src="hoi an- tuan 5.pdf" title="Infographic Hội An Xanh PDF"></iframe>
+
+            <p style="color: var(--text-muted); margin-bottom: 10px;"><strong>2. Báo cáo phân tích kỹ thuật và thao tác AI:</strong></p>
+            <iframe src="Tuần 5.pdf" title="Báo cáo Tuần 5"></iframe>
+        </div>
+
     </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800
+        });
+    </script>
 </body>
 </html>

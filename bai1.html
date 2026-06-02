@@ -2,40 +2,320 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bài 1: Quản trị Hệ thống</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô-đun 1: Quản trị Hệ thống | Gia Khánh</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.8; }
-        .page-header { background: #0f172a; padding: 60px 20px; text-align: center; color: white; border-bottom: 5px solid #2563eb; }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 15px; }
-        .content-wrap { max-width: 900px; margin: -30px auto 50px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .nav-btn { display: inline-block; padding: 10px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: 700; margin-bottom: 30px; }
-        h3 { color: #2563eb; margin: 25px 0 15px; font-size: 1.3rem; }
-        p, li { margin-bottom: 12px; color: #475569; }
-        ul { padding-left: 20px; margin-bottom: 20px; }
-        iframe { width: 100%; height: 750px; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 15px; }
+        :root {
+            --primary: #0f172a;       /* Xanh Navy đậm */
+            --secondary: #3b82f6;     /* Xanh dương */
+            --accent: #0ea5e9;        /* Xanh Cyan */
+            --bg-color: #f8fafc;      /* Nền xám sáng */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--secondary); }
+
+        nav ul { list-style: none; display: flex; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; padding: 8px 16px; border-radius: 8px; transition: var(--transition-smooth); }
+        nav a:hover, nav a.active { color: var(--secondary); background: #eff6ff; }
+
+        /* --- PAGE HEADER BANNER --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            padding: 140px 5% 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- CONTENT WRAPPER --- */
+        .content-container {
+            max-width: 1000px;
+            margin: -60px auto 80px;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #f1f5f9;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-btn:hover {
+            background: #e2e8f0;
+            transform: translateX(-5px);
+        }
+
+        /* --- STEP CARDS (Hiệu ứng thẻ nội dung chi tiết) --- */
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--secondary);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .step-content ul {
+            padding-left: 25px;
+            color: var(--text-muted);
+        }
+
+        .step-content li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #e2e8f0;
+            color: #b91c1c;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        /* --- PDF VIEWER --- */
+        .pdf-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .pdf-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+
+        iframe:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
     </style>
 </head>
 <body>
+
+    <header>
+        <a href="index.html" class="logo">Khánh<span>.Academic</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Tổng quan</a></li>
+                <li><a href="bai1.html" class="active">Tuần 1</a></li>
+                <li><a href="bai2.html">Tuần 2</a></li>
+                <li><a href="bai3.html">Tuần 3</a></li>
+                <li><a href="bai4.html">Tuần 4</a></li>
+                <li><a href="bai5.html">Tuần 5</a></li>
+                <li><a href="bai6.html">Tuần 6</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="page-header">
-        <h1>Quản trị Hệ thống & Tệp tin</h1>
+        <h1 data-aos="fade-down" data-aos-duration="1000">Quản trị Hệ thống & Tệp tin</h1>
+        <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Kỹ năng làm chủ môi trường hệ điều hành Windows, thiết lập cấu trúc lưu trữ khoa học và quản lý vòng đời dữ liệu.</p>
     </div>
-    <div class="content-wrap">
-        <a href="index.html" class="nav-btn">← Trở về Trang chủ</a>
-        
-        <h3>1. Thao tác điều hướng cốt lõi</h3>
-        <p>Sử dụng tổ hợp phím <strong>Windows + E</strong> để khởi chạy File Explorer. Xây dựng cấu trúc phân tầng khoa học: <code>New Volume \ ThucHanh_TranMauGiaKhanh \ Tailieu</code>. Áp dụng quy tắc đặt tên file nghiêm ngặt: không dấu, dùng gạch dưới (Ví dụ: <code>TranMauGiaKhanh_25021830_Anh1.png</code>).</p>
 
-        <h3>2. Quản lý vòng đời dữ liệu (Recycle Bin)</h3>
-        <ul>
-            <li>Tạo tệp văn bản mẫu <code>GhiChuQuanTrong.txt</code> và thực hiện xóa mềm (Delete).</li>
-            <li>Khôi phục tệp nguyên trạng thông qua chức năng <strong>Restore selected items</strong> trong Thùng rác.</li>
-            <li>Thực thi <i>Empty Recycle Bin</i> để giải phóng bộ nhớ vật lý cho ổ cứng.</li>
-        </ul>
+    <div class="content-container">
+        <a href="index.html" class="nav-btn" data-aos="fade-right">
+            <span>←</span> Trở về Trang Tổng quan
+        </a>
 
-        <h3>Tài liệu Minh chứng (PDF):</h3>
-        <iframe src="tuần 1.pdf"></iframe>
+        <div class="step-card" data-aos="fade-up">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Khởi chạy & Xây dựng Cấu trúc Thư mục</h2>
+            </div>
+            <div class="step-content">
+                <p>Nền tảng của việc quản trị hệ thống bắt đầu từ kỹ năng thao tác nhanh và quy hoạch vùng nhớ logic:</p>
+                <ul>
+                    <li>Sử dụng tổ hợp phím tắt <code>Windows + E</code> để khởi chạy nhanh trình quản lý hệ thống <strong>File Explorer</strong>.</li>
+                    <li>Thực hiện phân tầng cấu trúc lưu trữ với cây thư mục chuyên nghiệp theo định dạng: <code>New Volume \ ThucHanh_TranMauGiaKhanh \ Tailieu</code>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Quy ước Định danh Tệp tin (Naming Convention)</h2>
+            </div>
+            <div class="step-content">
+                <p>Áp dụng nguyên tắc đặt tên tệp tin chuẩn mực để đảm bảo tính toàn vẹn dữ liệu khi truyền tải qua các môi trường mạng hoặc hệ thống máy chủ:</p>
+                <ul>
+                    <li>Viết liền không dấu để tránh lỗi mã hóa ký tự (Encoding).</li>
+                    <li>Sử dụng dấu gạch dưới <code>_</code> để phân tách các trường thông tin thay cho khoảng trắng.</li>
+                    <li><strong>Ví dụ áp dụng thực tế:</strong> <code>TranMauGiaKhanh_25021830_Anh1.png</code> hoặc <code>TranMauGiaKhanh_25021830_Week.zip</code>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Quản lý Vòng đời & Khôi phục Dữ liệu</h2>
+            </div>
+            <div class="step-content">
+                <p>Kiểm soát quy trình xóa và khôi phục sự cố dữ liệu thông qua bộ nhớ đệm (Recycle Bin):</p>
+                <ul>
+                    <li><strong>Thực nghiệm xóa mềm:</strong> Tạo mới một tệp văn bản thô mang tên <code>GhiChuQuanTrong.txt</code>, sau đó thực hiện lệnh Delete để đưa tệp vào Thùng rác.</li>
+                    <li><strong>Thao tác khôi phục:</strong> Truy cập Recycle Bin, định vị tệp tin vừa xóa, nhấp chuột phải và sử dụng lệnh <code>Restore</code> (hoặc bấm <i>Restore selected items</i> trên thanh công cụ) để tự động trả tệp về đúng đường dẫn gốc ban đầu.</li>
+                    <li><strong>Giải phóng tài nguyên:</strong> Sử dụng lệnh <code>Empty Recycle Bin</code> để xóa vĩnh viễn dữ liệu rác, tối ưu hóa không gian trống cho ổ cứng vật lý.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pdf-section" data-aos="zoom-in" data-aos-delay="300">
+            <h2 class="pdf-title">📄 Tài liệu Minh chứng Thực hành (PDF)</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Bản báo cáo hệ thống ghi nhận hình ảnh thao tác File Explorer thực tế.</p>
+            <iframe src="tuần 1.pdf" title="Báo cáo Tuần 1"></iframe>
+        </div>
+
     </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,       // Animation chỉ chạy 1 lần
+            offset: 50,       // Kích hoạt khi cuộn cách phần tử 50px
+            duration: 800     // Thời gian chạy animation (0.8s)
+        });
+    </script>
 </body>
 </html>

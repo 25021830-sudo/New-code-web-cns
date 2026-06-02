@@ -2,37 +2,376 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bài 3: Kỹ nghệ Prompt</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style> /* COPY NGUYÊN CSS TỪ BÀI 1 XUỐNG ĐÂY */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.8; }
-        .page-header { background: #0f172a; padding: 60px 20px; text-align: center; color: white; border-bottom: 5px solid #2563eb; }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 15px; }
-        .content-wrap { max-width: 900px; margin: -30px auto 50px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .nav-btn { display: inline-block; padding: 10px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: 700; margin-bottom: 30px; }
-        h3 { color: #2563eb; margin: 25px 0 15px; font-size: 1.3rem; }
-        p, li { margin-bottom: 12px; color: #475569; }
-        ul { padding-left: 20px; margin-bottom: 20px; }
-        iframe { width: 100%; height: 750px; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 15px; }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô-đun 3: Kỹ nghệ Prompt | Gia Khánh</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f172a;       /* Xanh Navy đậm */
+            --secondary: #3b82f6;     /* Xanh dương */
+            --accent: #0ea5e9;        /* Xanh Cyan */
+            --bg-color: #f8fafc;      /* Nền xám sáng */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--secondary); }
+
+        nav ul { list-style: none; display: flex; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; padding: 8px 16px; border-radius: 8px; transition: var(--transition-smooth); }
+        nav a:hover, nav a.active { color: var(--secondary); background: #eff6ff; }
+
+        /* --- PAGE HEADER BANNER --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            padding: 140px 5% 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- CONTENT WRAPPER --- */
+        .content-container {
+            max-width: 1000px;
+            margin: -60px auto 80px;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #f1f5f9;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-btn:hover {
+            background: #e2e8f0;
+            transform: translateX(-5px);
+        }
+
+        /* --- STEP CARDS --- */
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--secondary);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .step-content ul {
+            padding-left: 25px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .step-content li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #e2e8f0;
+            color: #1d4ed8;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+            color: #1e3a8a;
+        }
+
+        /* Lưới so sánh Prompt */
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .prompt-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .prompt-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        /* --- PDF VIEWER --- */
+        .pdf-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .pdf-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+
+        iframe:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive cho Prompt Grid */
+        @media (max-width: 768px) {
+            .prompt-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="page-header">
-        <h1>Tối ưu hóa Kỹ nghệ Prompt</h1>
-    </div>
-    <div class="content-wrap">
-        <a href="index.html" class="nav-btn">← Trở về Trang chủ</a>
-        
-        <h3>Khung phân tích 3 cấp độ (Chủ đề: Thuyết tương đối hẹp)</h3>
-        <ul>
-            <li><strong>Cấp độ 1 (Cơ bản):</strong> Câu lệnh thô (VD: "Tóm tắt bài viết"). AI trả về đoạn văn dài, lộn xộn, dễ bỏ sót thuật ngữ lõi.</li>
-            <li><strong>Cấp độ 2 (Cải tiến):</strong> Bổ sung ràng buộc về định dạng (VD: Yêu cầu gạch đầu dòng). Kết quả trực quan hơn nhưng nội dung phân tích vẫn thiếu chiều sâu khoa học.</li>
-            <li><strong>Cấp độ 3 (Nâng cao):</strong> Áp dụng tổ hợp kỹ thuật: <i>Role Prompting</i> (Đóng vai chuyên gia Vật lý), <i>Context</i> (Giới hạn kiến thức), <i>Few-shot</i> (Cung cấp mẫu output dạng bảng). Kết quả: Trích xuất hoàn hảo, loại bỏ triệt để hiện tượng Ảo giác (Hallucination) của mô hình.</li>
-        </ul>
 
-        <h3>Báo cáo Kỹ thuật Viết Lệnh (PDF):</h3>
-        <iframe src="Tuần 3.pdf"></iframe>
+    <header>
+        <a href="index.html" class="logo">Khánh<span>.Academic</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Tổng quan</a></li>
+                <li><a href="bai1.html">Tuần 1</a></li>
+                <li><a href="bai2.html">Tuần 2</a></li>
+                <li><a href="bai3.html" class="active">Tuần 3</a></li>
+                <li><a href="bai4.html">Tuần 4</a></li>
+                <li><a href="bai5.html">Tuần 5</a></li>
+                <li><a href="bai6.html">Tuần 6</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1 data-aos="fade-down" data-aos-duration="1000">Tối ưu hóa Kỹ nghệ Prompt</h1>
+        <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Nghiên cứu nguyên lý giao tiếp với Mô hình ngôn ngữ lớn (LLM) và ứng dụng kỹ thuật Prompt Engineering vào học tập.</p>
     </div>
+
+    <div class="content-container">
+        <a href="index.html" class="nav-btn" data-aos="fade-right">
+            <span>←</span> Trở về Trang Tổng quan
+        </a>
+
+        <div class="step-card" data-aos="fade-up">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Phân tích Tác vụ Học tập</h2>
+            </div>
+            <div class="step-content">
+                <p>Trước khi viết Prompt, việc xác định đúng bản chất tác vụ là yếu tố tiên quyết để dẫn dắt AI đi đúng hướng. Báo cáo phân loại 3 tác vụ cốt lõi:</p>
+                <ul>
+                    <li><strong>Tác vụ Tổng hợp (Tóm tắt tài liệu):</strong> Chắt lọc kiến thức từ giáo trình, tránh bỏ sót luận điểm chính (Methodology, Results) và sai lệch thuật ngữ.</li>
+                    <li><strong>Tác vụ Hiểu (Giải thích khái niệm):</strong> Chuyển đổi lý thuyết trừu tượng thành ngôn ngữ gần gũi nhưng không làm mất tính chính xác khoa học.</li>
+                    <li><strong>Tác vụ Đánh giá (Tạo bộ câu hỏi):</strong> Thiết kế đa dạng dạng bài (trắc nghiệm, tự luận) bám sát trọng tâm kiến thức thay vì hỏi chi tiết vụn vặt.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Thực nghiệm: 3 Cấp độ Prompt</h2>
+            </div>
+            <div class="step-content">
+                <p>Nghiên cứu được thực thi trên chủ đề <i>"Thuyết tương đối hẹp của Einstein"</i> để đánh giá sự khác biệt rõ rệt ở chất lượng đầu ra (Output) giữa các cấp lệnh:</p>
+                
+                <div class="prompt-grid">
+                    <div class="prompt-item">
+                        <h4>🔴 Cấp độ Cơ bản</h4>
+                        <p><strong>Lệnh:</strong> <i>"Tóm tắt bài viết này cho tôi."</i></p>
+                        <p><strong>Kết quả:</strong> Trả về một đoạn văn thô, dài dòng, giọng văn máy móc. Phải hỏi lại nhiều lần mới trích xuất được thông tin cần thiết.</p>
+                    </div>
+                    <div class="prompt-item">
+                        <h4>🟡 Cấp độ Cải tiến</h4>
+                        <p><strong>Lệnh:</strong> <i>"Tóm tắt các luận điểm chính dưới dạng gạch đầu dòng..."</i></p>
+                        <p><strong>Kết quả:</strong> Dễ đọc hơn, bố cục gạch đầu dòng rõ ràng. Phù hợp cho việc đọc hiểu nhanh nhưng thiếu chiều sâu chuyên ngành.</p>
+                    </div>
+                    <div class="prompt-item">
+                        <h4>🟢 Cấp độ Nâng cao</h4>
+                        <p><strong>Lệnh:</strong> <i>Áp dụng Role Prompting (Chuyên gia), Few-shot & Constraints.</i></p>
+                        <p><strong>Kết quả:</strong> Cấu trúc cực kỳ chuyên nghiệp (bảng biểu, heading). Tối ưu hóa tuyệt đối cho việc ôn thi, triệt tiêu lỗi ảo giác thông tin.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Nguyên tắc Kiến trúc Lệnh (5W1H)</h2>
+            </div>
+            <div class="step-content">
+                <p>Tại sao Prompt Nâng cao luôn đưa ra kết quả xuất sắc? Đó là nhờ việc áp dụng chặt chẽ khung nguyên tắc <strong>5W1H</strong> kết hợp tư duy chuỗi logic:</p>
+                
+                <div class="highlight-box">
+                    <strong>1. Khung 5W1H:</strong> Xác định rõ <b>Ai</b> (Role), <b>Cái gì</b> (Task), <b>Ở đâu</b> (Context), <b>Tại sao</b> (Goal), <b>Khi nào</b> (Constraints/Deadline), và <b>Như thế nào</b> (Format).
+                </div>
+                <div class="highlight-box">
+                    <strong>2. Kỹ thuật Phân tách:</strong> Sử dụng các dấu phân tách dữ liệu như <code>"""</code> hoặc <code>###</code> để tách biệt rõ ràng phần hướng dẫn (Instruction) và phần dữ liệu đầu vào (Input Data).
+                </div>
+                <div class="highlight-box">
+                    <strong>3. Chain-of-Thought (Chuỗi tư duy):</strong> Yêu cầu AI "suy nghĩ từng bước" (think step by step). Điều này giúp mô hình giảm thiểu lỗi logic đứt gãy và hiện tượng Hallucination (ảo giác).
+                </div>
+            </div>
+        </div>
+
+        <div class="pdf-section" data-aos="zoom-in" data-aos-delay="300">
+            <h2 class="pdf-title">📄 Tài liệu Minh chứng Thực hành (PDF)</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Báo cáo chi tiết các phiên bản câu lệnh thực nghiệm trên hệ thống AI.</p>
+            <iframe src="Tuần 3.pdf" title="Báo cáo Tuần 3"></iframe>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800
+        });
+    </script>
 </body>
 </html>

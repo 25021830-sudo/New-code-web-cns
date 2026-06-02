@@ -2,38 +2,343 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bài 4: Cộng tác số</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style> /* COPY NGUYÊN CSS TỪ BÀI 1 XUỐNG ĐÂY */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.8; }
-        .page-header { background: #0f172a; padding: 60px 20px; text-align: center; color: white; border-bottom: 5px solid #2563eb; }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 15px; }
-        .content-wrap { max-width: 900px; margin: -30px auto 50px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .nav-btn { display: inline-block; padding: 10px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: 700; margin-bottom: 30px; }
-        h3 { color: #2563eb; margin: 25px 0 15px; font-size: 1.3rem; }
-        p, li { margin-bottom: 12px; color: #475569; }
-        ul { padding-left: 20px; margin-bottom: 20px; }
-        iframe { width: 100%; height: 750px; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 15px; }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô-đun 4: Cộng tác Đám mây | Gia Khánh</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f172a;       /* Xanh Navy đậm */
+            --secondary: #3b82f6;     /* Xanh dương */
+            --accent: #0ea5e9;        /* Xanh Cyan */
+            --bg-color: #f8fafc;      /* Nền xám sáng */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--secondary); }
+
+        nav ul { list-style: none; display: flex; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; padding: 8px 16px; border-radius: 8px; transition: var(--transition-smooth); }
+        nav a:hover, nav a.active { color: var(--secondary); background: #eff6ff; }
+
+        /* --- PAGE HEADER BANNER --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            padding: 140px 5% 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* --- CONTENT WRAPPER --- */
+        .content-container {
+            max-width: 1000px;
+            margin: -60px auto 80px;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #f1f5f9;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-btn:hover {
+            background: #e2e8f0;
+            transform: translateX(-5px);
+        }
+
+        /* --- STEP CARDS --- */
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--secondary);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .step-content ul {
+            padding-left: 25px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .step-content li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #e2e8f0;
+            color: #1d4ed8;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+            color: #1e3a8a;
+        }
+
+        .warning-box {
+            background: #fff1f2;
+            border-left: 4px solid #e11d48;
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+            color: #be123c;
+        }
+
+        /* --- PDF VIEWER --- */
+        .pdf-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .pdf-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+
+        iframe:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
-    <div class="page-header">
-        <h1>Quản trị Không gian Cộng tác</h1>
-    </div>
-    <div class="content-wrap">
-        <a href="index.html" class="nav-btn">← Trở về Trang chủ</a>
-        
-        <h3>Điều phối Dự án Nhóm 1 - Lớp Triết 33</h3>
-        <p>Quy trình triển khai hợp tác đa nền tảng được quản lý chặt chẽ qua các bước:</p>
-        <ul>
-            <li><strong>Điều phối Task:</strong> Sử dụng <i>Google Spreadsheet</i> để phân rã cấu trúc công việc (WBS) và theo dõi tiến độ thời gian thực.</li>
-            <li><strong>Lưu trữ tập trung:</strong> Cấu trúc thư mục chia sẻ trên <i>Google Drive</i>. Áp dụng phân quyền bảo mật: File gốc thiết lập chế độ View/Comment, thư mục làm việc (Working folder) cấp quyền Modify.</li>
-            <li><strong>Sáng tạo trực quan:</strong> Brainstorming và vẽ bản đồ lập luận trên <i>Miro</i>, biên tập nội dung qua <i>Docs</i> và thiết kế slide báo cáo tổng kết bằng <i>Canva</i>. Giao tiếp điều hành nhanh qua Messenger.</li>
-        </ul>
 
-        <h3>Báo cáo Tiến độ (PDF):</h3>
-        <iframe src="Tuần 4.pdf"></iframe>
+    <header>
+        <a href="index.html" class="logo">Khánh<span>.Academic</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Tổng quan</a></li>
+                <li><a href="bai1.html">Tuần 1</a></li>
+                <li><a href="bai2.html">Tuần 2</a></li>
+                <li><a href="bai3.html">Tuần 3</a></li>
+                <li><a href="bai4.html" class="active">Tuần 4</a></li>
+                <li><a href="bai5.html">Tuần 5</a></li>
+                <li><a href="bai6.html">Tuần 6</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1 data-aos="fade-down" data-aos-duration="1000">Giao tiếp & Hợp tác Không gian Số</h1>
+        <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Báo cáo điều phối và vận hành dự án nhóm (Lớp Triết 33 - Nhóm 1) thông qua hệ sinh thái công cụ quản trị đám mây toàn diện.</p>
     </div>
+
+    <div class="content-container">
+        <a href="index.html" class="nav-btn" data-aos="fade-right">
+            <span>←</span> Trở về Trang Tổng quan
+        </a>
+
+        <div class="step-card" data-aos="fade-up">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Quản trị Tiến độ & Tổ chức Lưu trữ</h2>
+            </div>
+            <div class="step-content">
+                <p>Với vai trò Trưởng nhóm, việc thiết lập bộ khung làm việc khoa học ngay từ đầu là yếu tố quyết định sự thành công của dự án đa thành viên:</p>
+                <ul>
+                    <li><strong>Phân rã công việc (WBS):</strong> Sử dụng <code>Google Spreadsheet</code> để liệt kê nhóm nhiệm vụ có cùng chức năng, giao việc cụ thể và theo dõi tiến độ (deadline) theo thời gian thực (Real-time). Rất hữu ích cho việc quan sát tổng thể và tinh chỉnh kế hoạch linh hoạt.</li>
+                    <li><strong>Cấu trúc Dữ liệu:</strong> Thiết lập hệ thống thư mục dùng chung trên <code>Google Drive</code> một cách khoa học (Tài liệu đọc, Bản nháp, Nội dung, Bài nộp, Ấn phẩm) giúp thành viên dễ dàng truy xuất thông tin mà không bị thất lạc file.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Đồng Soạn thảo & Sáng tạo Trực quan</h2>
+            </div>
+            <div class="step-content">
+                <p>Quá trình xây dựng nội dung bài tiểu luận môn Triết học đòi hỏi sự phối hợp mượt mà giữa các nền tảng trực tuyến:</p>
+                
+                <div class="highlight-box">
+                    💡 <strong>Luồng công việc (Workflow):</strong><br>
+                    1. <b>Brainstorming:</b> Vẽ sơ đồ tư duy (Mindmap) trên bảng trắng vô cực <code>Miro</code> để hệ thống hóa luận điểm.<br>
+                    2. <b>Soạn thảo:</b> Cùng nhau biên tập, chỉnh sửa và nhận xét chéo trên nền tảng <code>Google Docs</code>.<br>
+                    3. <b>Thiết kế & Báo cáo:</b> Dàn trang, làm ấn phẩm trình chiếu tổng kết trên <code>Canva</code>.
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Xử lý Rủi ro & Ma trận Phân quyền</h2>
+            </div>
+            <div class="step-content">
+                <p>Trong quá trình hợp tác trực tuyến, dự án đã gặp phải một số rào cản kỹ thuật và được khắc phục triệt để:</p>
+                
+                <div class="warning-box">
+                    ⚠️ <strong>Hạn chế thiết bị:</strong> Việc các thành viên sử dụng điện thoại để thao tác trên Docs/Sheets gặp nhiều bất tiện do màn hình nhỏ.<br>
+                    ➔ <i>Giải pháp:</i> Quán triệt việc sử dụng máy tính xách tay (Laptop) cho các tác vụ soạn thảo lõi. Sử dụng <code>Messenger</code> làm kênh giao tiếp linh hoạt, phổ biến để đôn đốc tiến độ nhanh chóng.
+                </div>
+                
+                <p><strong>Bảo mật & Toàn vẹn Dữ liệu:</strong> Để tránh tình trạng thành viên xóa nhầm hoặc sửa đè dữ liệu quan trọng, mình đã thiết lập <i>Ma trận phân quyền (Access Control)</i>:</p>
+                <ul>
+                    <li>Các file đang trong quá trình xây dựng (Nội dung nháp): Cấp quyền <strong>Modify</strong> (Chỉnh sửa).</li>
+                    <li>Các file Báo cáo cuối cùng, tài liệu gốc chuẩn: Chỉ cấp quyền <strong>View</strong> (Xem) hoặc <strong>Comment</strong> (Nhận xét).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pdf-section" data-aos="zoom-in" data-aos-delay="300">
+            <h2 class="pdf-title">📄 Tài liệu Minh chứng Thực hành (PDF)</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Báo cáo chi tiết giao diện làm việc của các nền tảng Drive, Docs, Miro, Canva và Messenger.</p>
+            <iframe src="Tuần 4.pdf" title="Báo cáo Tuần 4"></iframe>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800
+        });
+    </script>
 </body>
 </html>

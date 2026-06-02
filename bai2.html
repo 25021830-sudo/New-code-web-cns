@@ -2,39 +2,333 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bài 2: Mật mã ECC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style> /* COPY NGUYÊN CSS TỪ BÀI 1 XUỐNG ĐÂY */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.8; }
-        .page-header { background: #0f172a; padding: 60px 20px; text-align: center; color: white; border-bottom: 5px solid #2563eb; }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 15px; }
-        .content-wrap { max-width: 900px; margin: -30px auto 50px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .nav-btn { display: inline-block; padding: 10px 20px; background: #f1f5f9; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: 700; margin-bottom: 30px; }
-        h3 { color: #2563eb; margin: 25px 0 15px; font-size: 1.3rem; }
-        p, li { margin-bottom: 12px; color: #475569; }
-        ul { padding-left: 20px; margin-bottom: 20px; }
-        iframe { width: 100%; height: 750px; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 15px; }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mô-đun 2: Nghiên cứu Mật mã ECC | Gia Khánh</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f172a;       /* Xanh Navy đậm */
+            --secondary: #3b82f6;     /* Xanh dương */
+            --accent: #0ea5e9;        /* Xanh Cyan */
+            --bg-color: #f8fafc;      /* Nền xám sáng */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--secondary); }
+
+        nav ul { list-style: none; display: flex; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; padding: 8px 16px; border-radius: 8px; transition: var(--transition-smooth); }
+        nav a:hover, nav a.active { color: var(--secondary); background: #eff6ff; }
+
+        /* --- PAGE HEADER BANNER --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            padding: 140px 5% 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- CONTENT WRAPPER --- */
+        .content-container {
+            max-width: 1000px;
+            margin: -60px auto 80px;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #f1f5f9;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-btn:hover {
+            background: #e2e8f0;
+            transform: translateX(-5px);
+        }
+
+        /* --- STEP CARDS (Hiệu ứng thẻ nội dung chi tiết) --- */
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--secondary);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .step-content ul {
+            padding-left: 25px;
+            color: var(--text-muted);
+        }
+
+        .step-content li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #e2e8f0;
+            color: #1d4ed8;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        /* --- PDF VIEWER --- */
+        .pdf-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .pdf-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+
+        iframe:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
     </style>
 </head>
 <body>
+
+    <header>
+        <a href="index.html" class="logo">Khánh<span>.Academic</span></a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Tổng quan</a></li>
+                <li><a href="bai1.html">Tuần 1</a></li>
+                <li><a href="bai2.html" class="active">Tuần 2</a></li>
+                <li><a href="bai3.html">Tuần 3</a></li>
+                <li><a href="bai4.html">Tuần 4</a></li>
+                <li><a href="bai5.html">Tuần 5</a></li>
+                <li><a href="bai6.html">Tuần 6</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="page-header">
-        <h1>Nghiên cứu Mật mã ECC cho IoT</h1>
+        <h1 data-aos="fade-down" data-aos-duration="1000">Khai thác Dữ liệu & Đánh giá Học thuật</h1>
+        <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Nghiên cứu ứng dụng Mật mã đường cong Elliptic (ECC) trong bảo mật thiết bị IoT thông qua bộ tiêu chuẩn thẩm định CRAAP.</p>
     </div>
-    <div class="content-wrap">
-        <a href="index.html" class="nav-btn">← Trở về Trang chủ</a>
-        
-        <h3>1. Phạm vi Công nghệ</h3>
-        <p>Báo cáo đánh giá hiệu năng của thuật toán Mật mã đường cong Elliptic (ECC) trên các hệ thống nhúng giới hạn tài nguyên như vi điều khiển ESP32 và ARM Cortex-M. Đặc điểm ưu việt: Khóa mã hóa ECC 256-bit cung cấp mức độ bảo mật tương đương với khóa RSA 3072-bit, giúp tiết kiệm tối đa RAM và năng lượng tiêu thụ.</p>
 
-        <h3>2. Thẩm định Dữ liệu (Bộ lọc CRAAP)</h3>
-        <ul>
-            <li><strong>Tính cập nhật:</strong> Khoanh vùng tài liệu từ năm 2020 - 2026, bám sát bộ tiêu chuẩn mã hóa hậu lượng tử của NIST.</li>
-            <li><strong>Độ tin cậy:</strong> Chọn lọc nghiêm ngặt các công bố khoa học từ phân hạng Q1/Q2 Scopus, xuất bản bởi các tổ chức quốc tế uy tín như IEEE, ACM, Springer.</li>
-        </ul>
+    <div class="content-container">
+        <a href="index.html" class="nav-btn" data-aos="fade-right">
+            <span>←</span> Trở về Trang Tổng quan
+        </a>
 
-        <h3>Tài liệu Nghiên cứu Chuyên sâu (PDF):</h3>
-        <iframe src="Tuần 2.pdf"></iframe>
+        <div class="step-card" data-aos="fade-up">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Chủ đề & Phạm vi Nghiên cứu</h2>
+            </div>
+            <div class="step-content">
+                <p>Trong bối cảnh bùng nổ của Internet vạn vật (IoT), việc bảo mật dữ liệu trên các thiết bị hạn chế về tài nguyên (CPU, RAM, Pin) trở thành một thách thức mang tính hệ thống. Báo cáo tập trung vào việc giải quyết bài toán này thông qua <strong>Mật mã đường cong Elliptic (ECC)</strong>.</p>
+                <div class="highlight-box">
+                    💡 Đột phá công nghệ: Dựa trên bài toán logarit rời rạc, khóa mã hóa ECC 256-bit cung cấp mức độ bảo mật tương đương với khóa mã hóa khổng lồ RSA 3072-bit.
+                </div>
+                <ul>
+                    <li><strong>Thiết bị mục tiêu:</strong> Đánh giá hiệu năng thực thi thuật toán ECC trên các vi điều khiển nhúng phổ biến như <code>ESP32</code> và <code>ARM Cortex-M</code>.</li>
+                    <li><strong>Giới hạn thời gian:</strong> Khoanh vùng tài liệu từ 2020 - 2026 nhằm bám sát các tiêu chuẩn mã hóa hậu lượng tử (NIST Post-Quantum Cryptography).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Quy trình Khai thác Dữ liệu</h2>
+            </div>
+            <div class="step-content">
+                <p>Quá trình tổng hợp tri thức học thuật không thực hiện thủ công mà được tăng tốc thông qua các công cụ tìm kiếm tích hợp Trí tuệ nhân tạo chuyên sâu:</p>
+                <ul>
+                    <li>Sử dụng các công cụ AI phân tích tài liệu học thuật hàng đầu để trích xuất nhanh luận điểm từ các bài báo khoa học phức tạp.</li>
+                    <li>Sàng lọc và đối chiếu chéo (Cross-check) dữ liệu để hình thành hệ thống tài liệu tham khảo chất lượng cao phục vụ việc nghiên cứu sâu.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Tiêu chuẩn Thẩm định CRAAP</h2>
+            </div>
+            <div class="step-content">
+                <p>Toàn bộ tài liệu tham khảo đều phải vượt qua bộ lọc thẩm định nghiêm ngặt CRAAP nhằm đảm bảo tính khách quan và chiều sâu khoa học:</p>
+                <ul>
+                    <li><strong>Tính cập nhật (Currency):</strong> Loại bỏ tài liệu quá cũ, chỉ lấy dữ liệu phục vụ nghiên cứu tiêu chuẩn mã hóa giai đoạn 2020-2026.</li>
+                    <li><strong>Thẩm quyền (Authority):</strong> Ưu tiên các bài báo đạt chuẩn Q1/Q2 thuộc danh mục Scopus, xuất bản bởi các tổ chức quốc tế uy tín như <code>IEEE</code>, <code>ACM</code>, <code>NIST</code>.</li>
+                    <li><strong>Tính chính xác (Accuracy):</strong> Đối chiếu chéo các nền tảng công thức toán học lõi (Định lý Bézout, cấu trúc nhóm Abel) giữa bài báo khoa học và sách giáo khoa chuyên ngành để loại bỏ sai sót lý thuyết.</li>
+                    <li><strong>Mục đích (Purpose):</strong> Lọc bỏ hoàn toàn các ấn phẩm mang tính chất tiếp thị quảng cáo của các tập đoàn bảo mật thương mại, chỉ giữ lại các nghiên cứu trung lập độc lập.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pdf-section" data-aos="zoom-in" data-aos-delay="300">
+            <h2 class="pdf-title">📄 Tài liệu Minh chứng Thực hành (PDF)</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Bản báo cáo chuyên sâu về quá trình phân tích ứng dụng Mật mã đường cong Elliptic.</p>
+            <iframe src="Tuần 2.pdf" title="Báo cáo Tuần 2"></iframe>
+        </div>
+
     </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,       // Animation chỉ chạy 1 lần
+            offset: 50,       // Kích hoạt khi cuộn cách phần tử 50px
+            duration: 800     // Thời gian chạy animation (0.8s)
+        });
+    </script>
 </body>
 </html>
