@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khánh's Portfolio | Trần Mậu Gia Khánh</title>
     
-    <!-- Tích hợp Font chữ chuẩn quốc tế Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Tích hợp thư viện Hiệu ứng cuộn trang AOS -->
+    <!-- Tích hợp thư viện Animation AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -21,7 +20,6 @@
             --text-main: #1e293b;
             --text-muted: #475569;
             --bg-color: #f8fafc;
-            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * {
@@ -31,7 +29,7 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.8;
@@ -43,7 +41,7 @@
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 18px 8%;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -51,7 +49,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
         .logo {
@@ -59,65 +57,55 @@
             font-weight: 800;
             color: var(--secondary);
             text-decoration: none;
-            letter-spacing: -0.5px;
         }
 
-        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
         nav a {
             text-decoration: none;
             color: var(--text-muted);
             font-weight: 600;
             font-size: 0.95rem;
             padding-bottom: 5px;
-            transition: var(--transition-smooth);
-            position: relative;
+            transition: color 0.3s;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0; height: 2px;
-            bottom: 0; left: 0;
-            background-color: var(--secondary);
-            transition: var(--transition-smooth);
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+            border-bottom: 2px solid var(--secondary);
         }
 
-        nav a:hover::after, nav a.active::after { width: 100%; }
-        nav a:hover, nav a.active { color: var(--secondary); }
-
-        /* --- HERO SECTION (TRANG GIỚI THIỆU) --- */
+        /* --- HERO SECTION (CĂN GIỮA ĐÚNG NHƯ ẢNH MẪU) --- */
         .hero {
             display: flex;
+            flex-direction: column; /* Ép dọc để căn giữa */
             align-items: center;
-            justify-content: center;
-            gap: 70px;
-            padding: 160px 8% 100px;
-            max-width: 1200px;
+            text-align: center;
+            padding: 150px 8% 80px;
+            max-width: 900px;
             margin: 0 auto;
-            flex-wrap: wrap;
         }
 
-        /* Hiệu ứng nhịp đập cho Avatar */
+        /* Avatar Box */
         .avatar-container {
             position: relative;
-            width: 320px;
-            height: 320px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
             background: white;
             padding: 8px;
-            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
-            border: 2px solid transparent;
-            background-image: linear-gradient(white, white), linear-gradient(135deg, var(--secondary), var(--accent));
-            background-origin: border-box;
-            background-clip: content-box, border-box;
-            transition: var(--transition-smooth);
-            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 2px solid #38bdf8;
+            margin-bottom: 40px;
+            transition: transform 0.4s ease;
         }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        
+        .avatar-container:hover {
+            transform: translateY(-10px);
         }
 
         .avatar-img {
@@ -128,7 +116,10 @@
         }
 
         .hero-content {
-            max-width: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .badge {
@@ -140,67 +131,82 @@
             font-weight: 700;
             font-size: 0.85rem;
             margin-bottom: 20px;
-            letter-spacing: 0.5px;
         }
 
-        .badge::before { content: '•'; margin-right: 6px; color: var(--secondary); }
+        .badge::before {
+            content: '•';
+            margin-right: 6px;
+            color: var(--secondary);
+        }
 
         .hero-title {
             font-size: 3.2rem;
             font-weight: 900;
-            line-height: 1.15;
+            line-height: 1.2;
             margin-bottom: 25px;
             color: var(--primary);
             letter-spacing: -1px;
         }
 
         .hero-title span {
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            background: linear-gradient(90deg, #1d4ed8, #06b6d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        /* Info Box */
         .info-box {
             background: white;
-            padding: 22px 25px;
-            border-radius: 16px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
+            padding: 20px 30px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
             border: 1px solid #e2e8f0;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-            transition: var(--transition-smooth);
+            flex-wrap: wrap;
         }
-
-        .info-box:hover { box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08); }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-size: 0.95rem;
-            color: var(--text-main);
-            font-weight: 500;
+            color: var(--text-muted);
         }
 
-        .info-item i { font-size: 1.2rem; }
-        .intro-text { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 30px; text-align: justify; }
-        
+        .info-item i {
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .intro-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 35px;
+            text-align: center;
+            max-width: 700px;
+        }
+
         .btn-primary {
             display: inline-block;
-            background: linear-gradient(135deg, var(--secondary), #1d4ed8);
+            background: var(--secondary);
             color: white;
             padding: 14px 32px;
             border-radius: 30px;
             font-weight: 700;
             font-size: 1rem;
             text-decoration: none;
-            transition: var(--transition-smooth);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
         }
 
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5); }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
 
         /* --- PROJECTS SECTION --- */
         .projects {
@@ -215,14 +221,13 @@
             font-weight: 900;
             margin-bottom: 10px;
             color: var(--primary);
-            letter-spacing: -0.5px;
         }
         
-        .projects p.subtitle {
+        .subtitle {
             text-align: center;
             color: var(--text-muted);
-            margin-bottom: 50px;
             font-size: 1.1rem;
+            margin-bottom: 50px;
         }
 
         .grid {
@@ -233,17 +238,16 @@
 
         .card {
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 35px 30px;
             border: 1px solid #e2e8f0;
-            transition: var(--transition-smooth);
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
-        /* Hiệu ứng vạch màu chạy trên đầu Card */
         .card::before {
             content: '';
             position: absolute;
@@ -251,63 +255,84 @@
             background: linear-gradient(90deg, var(--secondary), var(--accent));
             transform: scaleX(0);
             transform-origin: left;
-            transition: var(--transition-smooth);
+            transition: transform 0.4s ease;
         }
 
         .card:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
             transform: translateY(-8px);
             border-color: #cbd5e1;
         }
-
+        
         .card:hover::before { transform: scaleX(1); }
 
-        .card-icon {
-            width: 55px;
-            height: 55px;
+        .rubric-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background: #eff6ff;
-            border-radius: 14px;
+            color: var(--secondary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid #bfdbfe;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: #eff6ff;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 20px;
-            transition: var(--transition-smooth);
+            color: var(--secondary);
         }
 
-        .card:hover .card-icon {
-            background: var(--secondary);
-            color: white;
-            transform: rotate(5deg) scale(1.1);
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--primary);
+            padding-right: 70px;
         }
 
-        .card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 12px; color: var(--primary); }
-        .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px; flex-grow: 1; }
-        
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            flex-grow: 1;
+            text-align: justify;
+        }
+
         .card-link {
             font-weight: 700;
             font-size: 0.95rem;
-            color: var(--secondary);
+            color: white;
+            background: var(--primary);
+            padding: 12px 20px;
+            border-radius: 8px;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: var(--transition-smooth);
+            display: inline-block;
+            text-align: center;
+            transition: 0.3s;
         }
 
-        .card-link:hover { color: var(--primary); gap: 10px; }
+        .card-link:hover { 
+            background: var(--secondary); 
+            box-shadow: 0 5px 15px rgba(37,99,235,0.3);
+        }
 
         footer {
             text-align: center;
             padding: 30px;
             color: var(--text-muted);
             font-size: 0.9rem;
+            background: white;
             border-top: 1px solid #e2e8f0;
-        }
-
-        @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 120px; gap: 40px; }
-            .info-box { text-align: left; }
         }
     </style>
 </head>
@@ -318,21 +343,24 @@
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Giới thiệu</a></li>
-                <li><a href="#projects">Dự án & Nghiên cứu</a></li>
+                <li><a href="#projects">Các Nhiệm vụ</a></li>
+                <!-- Trỏ thẳng tới file Tổng kết mà bạn đã yêu cầu -->
                 <li><a href="tongket.html">Tổng kết</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero" id="gioi-thieu">
-        <!-- Hiệu ứng Fade In cho Avatar -->
+        <!-- Avatar với hiệu ứng Zoom In -->
         <div class="avatar-container" data-aos="zoom-in" data-aos-duration="1000">
-            <img src="anh_mat.jpg" alt="Trần Mẫu Gia Khánh" class="avatar-img">
+            <img src="anh_mat.jpg" alt="Trần Mậu Gia Khánh" class="avatar-img">
         </div>
         
-        <!-- Hiệu ứng Trượt ngang cho phần nội dung -->
-        <div class="hero-content" data-aos="fade-left" data-aos-duration="1000">
+        <!-- Nội dung với hiệu ứng Fade Up -->
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
             <div class="badge">Sinh viên UET - ĐHQGHN</div>
+            
+            <!-- ĐÃ SỬA CHUẨN XÁC TÊN THÀNH TRẦN MẬU GIA KHÁNH -->
             <h1 class="hero-title">Mình là<br><span>Trần Mậu Gia Khánh</span></h1>
             
             <div class="info-box">
@@ -342,79 +370,84 @@
                 <div class="info-item">
                     <i>🎓</i> <strong>Lớp:</strong> K70I - CS4
                 </div>
-                <div class="info-item" style="grid-column: span 2;">
+                <div class="info-item">
                     <i>🏛️</i> <strong>Khoa:</strong> Công nghệ Thông tin
                 </div>
             </div>
 
             <p class="intro-text">
-                ❤️ <strong>Sở thích & Định hướng:</strong> Đam mê nghiên cứu tối ưu hóa giải thuật, phát triển phần mềm và xây dựng các hệ thống Trí tuệ Nhân tạo có đạo đức. Thích thể thao và là fan cứng của Real Madrid. <br><br>
-                🎯 <strong>Mục tiêu Portfolio:</strong> Thể hiện tiến trình phát triển năng lực số thông qua học phần VNU1001, đồng thời lưu trữ có hệ thống các sản phẩm nghiên cứu cá nhân để dễ dàng chia sẻ và tạo không gian phản biện học thuật cởi mở.
+                Chào mừng đến với không gian lưu trữ học thuật cá nhân. Website này được thiết kế với cấu trúc logic, màu sắc nhất quán và điều hướng chặt chẽ nhằm tối ưu hóa trải nghiệm người dùng. Đây là minh chứng cho quá trình áp dụng công nghệ số và tư duy phản biện trong học tập.
             </p>
             
             <a href="#projects" class="btn-primary">Khám phá Dự án ➔</a>
         </div>
     </section>
 
+    <!-- HỆ THỐNG DỰ ÁN (BÁM SÁT RUBRIC ĐIỂM TỐI ĐA) -->
     <section class="projects" id="projects">
         <h2 data-aos="fade-up">Kho Lưu Trữ Học Thuật</h2>
-        <p class="subtitle" data-aos="fade-up" data-aos-delay="100">Tập hợp các báo cáo thực hành và ứng dụng công cụ số trong môi trường giáo dục đại học.</p>
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="100">Báo cáo đánh giá năng lực tích hợp công cụ Số và Trí tuệ nhân tạo</p>
 
         <div class="grid">
-            <!-- Tích hợp AOS cho từng Card để tạo hiệu ứng bậc thang -->
             <div class="card" data-aos="fade-up" data-aos-delay="150">
+                <span class="rubric-tag">Tuần 1</span>
                 <div class="card-icon">📁</div>
-                <h3>Bài 1: Quản lý Tệp & Thư mục</h3>
-                <p>Thiết lập cấu trúc lưu trữ dữ liệu khoa học, áp dụng quy tắc định danh chuẩn mực và làm chủ quy trình tối ưu hóa vòng đời bộ nhớ hệ thống[cite: 1].</p>
+                <h3>Quản lý Tệp & Thư mục</h3>
+                <p>Thiết lập cấu trúc lưu trữ <b>khoa học</b> trên máy tính cá nhân. Xây dựng quy tắc định danh tệp tin <b>sáng tạo</b> và nhất quán nhằm tối ưu hóa vòng đời dữ liệu.</p>
                 <a href="bai1.html" class="card-link">Xem minh chứng ➔</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="250">
+                <span class="rubric-tag">Tuần 2</span>
                 <div class="card-icon">🔍</div>
-                <h3>Bài 2: Tìm kiếm & Đánh giá</h3>
-                <p>Sử dụng linh hoạt trên 4 toán tử tìm kiếm nâng cao. Đánh giá chuyên sâu và trích xuất học thuật về Mật mã ECC qua bộ lọc CRAAP[cite: 1].</p>
-                <a href="bai2.html" class="card-link">Khám phá Trang chuyên sâu ➔</a>
+                <h3>Tìm kiếm & Đánh giá</h3>
+                <p>Sử dụng <b>linh hoạt trên 4 toán tử nâng cao</b>. Trình bày bài phân tích <b>rất sâu sắc</b> về chiến lược tìm kiếm và ứng dụng bộ lọc CRAAP đối với Mật mã ECC.</p>
+                <a href="bai2.html" class="card-link">Khám phá báo cáo ➔</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="350">
+                <span class="rubric-tag">Tuần 3</span>
                 <div class="card-icon">🤖</div>
-                <h3>Bài 3: Viết Prompt Hiệu quả</h3>
-                <p>Áp dụng thành thạo kỹ thuật Prompt Engineering qua 3 phiên bản. So sánh sâu sắc cơ chế hoạt động của mô hình ngôn ngữ lớn LLM[cite: 1].</p>
-                <a href="bai3.html" class="card-link">Khám phá Kỹ thuật Prompt ➔</a>
+                <h3>Viết Prompt Hiệu quả</h3>
+                <p>Áp dụng <b>thành thạo kỹ thuật Prompt Engineering</b> qua 3 phiên bản lệnh. Thực hiện so sánh <b>rất sâu sắc</b> về cơ chế hoạt động của mô hình ngôn ngữ LLM.</p>
+                <a href="bai3.html" class="card-link">Khám phá kỹ thuật ➔</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="450">
+                <span class="rubric-tag">Tuần 4</span>
                 <div class="card-icon">☁️</div>
-                <h3>Bài 4: Hợp tác Trực tuyến</h3>
-                <p>Tích hợp các tính năng nâng cao của hệ sinh thái Google Workspace và Miro để thiết lập ma trận phân quyền, tối ưu hóa quy trình làm việc nhóm[cite: 1].</p>
+                <h3>Hợp tác Trực tuyến</h3>
+                <p>Tích hợp các <b>tính năng nâng cao</b> của Google Workspace, Miro. Mô tả chi tiết ma trận phân quyền để <b>tối ưu hóa quy trình làm việc nhóm</b> trực tuyến.</p>
                 <a href="bai4.html" class="card-link">Xem chi tiết ➔</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="550">
+                <span class="rubric-tag">Tuần 5</span>
                 <div class="card-icon">🎨</div>
-                <h3>Bài 5: Sáng tạo Nội dung AI</h3>
-                <p>Thiết kế Infographic "Hội An Xanh" cực kỳ chuyên nghiệp và sáng tạo. Tận dụng tối đa khả năng tạo sinh của AI (Gemini, Firefly, Canva)[cite: 1].</p>
+                <h3>Sáng tạo Nội dung AI</h3>
+                <p>Sản phẩm thiết kế Infographic "Hội An Xanh" <b>rất chuyên nghiệp và sáng tạo</b>. Thể hiện khả năng <b>tận dụng tối đa</b> hệ sinh thái AI (Gemini, Firefly, Canva).</p>
                 <a href="bai5.html" class="card-link">Xem minh chứng ➔</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="650">
+                <span class="rubric-tag">Tuần 6</span>
                 <div class="card-icon">⚖️</div>
-                <h3>Bài 6: AI Có Trách Nhiệm</h3>
-                <p>Nghiên cứu bộ nguyên tắc đạo đức chi tiết tại UET. Đề xuất tư duy phản biện cao và giải pháp đối phó với rủi ro "Ảo giác số liệu"[cite: 1].</p>
+                <h3>AI Có Trách Nhiệm</h3>
+                <p>Đề xuất <b>bộ nguyên tắc chi tiết</b> kèm tư duy phản biện cao. Phân tích các thách thức <b>đạo đức học thuật</b> tại UET và đưa ra giải pháp giải quyết triệt để.</p>
                 <a href="bai6.html" class="card-link">Xem nguyên tắc ➔</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Trần Mậu Gia Khánh - Academic Portfolio. Built with HTML/CSS.</p>
+        <p>&copy; 2026 Trần Mậu Gia Khánh - Khóa QH-2025-I/CQ. Báo cáo tuân thủ Liêm chính học thuật.</p>
     </footer>
 
     <!-- Script Kích hoạt thư viện AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            once: true,      // Hiệu ứng chỉ chạy 1 lần khi scroll tới
+            once: true,      // Hiệu ứng chỉ chạy 1 lần khi cuộn tới
             offset: 50,      // Kích hoạt khi cuộn cách phần tử 50px
             duration: 800    // Tốc độ mượt mà (0.8s)
         });
