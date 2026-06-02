@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 5 - Sáng tạo nội dung với AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1e40af; --secondary: #3b82f6; --bg-color: #f8fafc; --text-main: #0f172a; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-color); color: var(--text-main); padding: 40px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .back-btn { display: inline-block; margin-bottom: 25px; text-decoration: none; color: var(--secondary); font-weight: 700; }
+        h1 { color: var(--primary); font-size: 2.2rem; font-weight: 800; margin-bottom: 25px; }
+        .ai-pipeline { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+        .ai-card { background: #f8fafc; padding: 20px; border-radius: 12px; border-bottom: 4px solid var(--secondary); }
+        .ai-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 1rem; }
+        .ai-card p { font-size: 0.85rem; color: #475569; }
+        .media-flex { display: flex; flex-direction: column; gap: 30px; margin-top: 30px; }
+        .info-img { width: 100%; max-width: 600px; border-radius: 16px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
+        iframe { width: 100%; height: 600px; border: 1px solid #e2e8f0; border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
+        <h1>Bài 5: Sáng tạo nội dung số với công cụ AI</h1>
+        
+        <div class="ai-pipeline">
+            <div class="ai-card">
+                <h4>1. Kịch bản (Google Gemini)</h4>
+                <p>Lập kế hoạch nội dung và biên tập văn bản chi tiết xoay quanh 3 trụ cột du lịch bền vững tại Hội An: Môi trường, Văn hóa và Kinh tế bản địa.</p>
+            </div>
+            <div class="ai-card">
+                <h4>2. Thị giác (Adobe Firefly)</h4>
+                <p>Tạo sinh hình ảnh đèn lồng cổ kính mang bản sắc Việt Nam với độ chân thực cao, đảm bảo tính đồng nhất thị giác và an toàn bản quyền dữ liệu.</p>
+            </div>
+            <div class="ai-card">
+                <h4>3. Layout (Canva AI)</h4>
+                <p>Thiết lập mẫu thiết kế Bốn mùa, thực hiện thay đổi hệ thống cấu trúc khối thông tin và bổ sung lời kêu gọi hành động (CTA) "Giữ nét cổ kính, chọn cách đi xanh".</p>
+            </div>
+        </div>
+
+        <div class="media-flex">
+            <div style="text-align: center;">
+                <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: var(--primary);">Ấn phẩm Infographic "Hội An Xanh":</h3>
+                <img src="tmphnsqp8_inforgraphic.png" alt="Hội An Xanh Infographic" class="info-img">
+            </div>
+            
+            <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--primary);">Tài liệu PDF Infographic đính kèm:</h3>
+                <iframe src="hoi an- tuan 5.pdf"></iframe>
+            </div>
+
+            <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--primary);">Báo cáo quy trình phân tích sáng tạo:</h3>
+                <iframe src="Tuần 5.pdf"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

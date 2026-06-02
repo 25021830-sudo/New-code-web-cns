@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3 - Kỹ nghệ Prompt Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1e40af; --secondary: #3b82f6; --bg-color: #f8fafc; --text-main: #0f172a; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-color); color: var(--text-main); padding: 40px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .back-btn { display: inline-block; margin-bottom: 25px; text-decoration: none; color: var(--secondary); font-weight: 700; }
+        h1 { color: var(--primary); font-size: 2.2rem; font-weight: 800; margin-bottom: 25px; }
+        .prompt-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 0.9rem; }
+        .prompt-table th { background: var(--primary); color: white; padding: 12px; text-align: left; }
+        .prompt-table td { padding: 12px; border: 1px solid #e2e8f0; }
+        .prompt-table tr:nth-child(even) { background: #f8fafc; }
+        iframe { width: 100%; height: 650px; border: 1px solid #e2e8f0; border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
+        <h1>Bài 3: Tổng quan về Trí tuệ nhân tạo & Tối ưu hóa Prompt</h1>
+        
+        <h3 style="margin-bottom: 15px; color: var(--primary);">Cấu trúc thực nghiệm 3 cấp độ Prompt (Tác vụ tóm tắt bài đọc Thuyết tương đối)</h3>
+        <table class="prompt-table">
+            <thead>
+                <tr>
+                    <th>Cấp độ câu lệnh</th>
+                    <th>Cú pháp Prompt thực tế</th>
+                    <th>Đánh giá chất lượng đầu ra (Output)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cơ bản</strong></td>
+                    <td><em>"Tóm tắt bài viết này cho tôi."</em></td>
+                    <td>Đầu ra thô dạng đoạn văn dài, cấu trúc lộn xộn, dễ bỏ sót thuật ngữ chuyên ngành.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cải tiến</strong></td>
+                    <td><em>"Tóm tắt các luận điểm chính của văn bản dưới dạng gạch đầu dòng ngắn gọn."</em></td>
+                    <td>Thông tin rõ ràng hơn, dễ theo dõi nhưng thiếu chiều sâu lý thuyết và tính định hướng.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nâng cao (Few-shot)</strong></td>
+                    <td><em>"Cấu trúc vai trò Chuyên gia Vật lý lý thuyết + Bối cảnh ôn tập + Ràng buộc dữ liệu + Cung cấp mẫu Few-shot mẫu dữ liệu đầu ra dạng bảng..."</em></td>
+                    <td>Đầu ra đạt chuẩn cấu trúc học thuật chuyên nghiệp, loại bỏ lỗi logic và hiện tượng ảo giác (Hallucination) của AI.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Báo cáo phân tích Prompt kỹ thuật (PDF trực tiếp):</h3>
+        <iframe src="Tuần 3.pdf"></iframe>
+    </div>
+</body>
+</html>

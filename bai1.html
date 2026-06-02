@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1 - Hệ thống máy tính & Quản lý tệp tin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1e40af; --secondary: #3b82f6; --bg-color: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-color); color: var(--text-main); padding: 40px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; }
+        .back-btn { display: inline-block; margin-bottom: 25px; text-decoration: none; color: var(--secondary); font-weight: 700; font-size: 0.95rem; }
+        h1 { color: var(--primary); font-size: 2.2rem; font-weight: 800; margin-bottom: 25px; }
+        .grid-info { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .info-card { background: #f8fafc; padding: 25px; border-radius: 12px; border-left: 5px solid var(--secondary); }
+        .info-card h3 { margin-bottom: 12px; color: var(--primary); font-size: 1.1rem; }
+        .info-card ul { list-style-position: inside; padding-left: 5px; color: var(--text-muted); font-size: 0.9rem; }
+        .info-card ul li { margin-bottom: 6px; }
+        iframe { width: 100%; height: 650px; border: 1px solid #e2e8f0; border-radius: 12px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
+        <h1>Bài 1: Máy tính và các thiết bị ngoại vi</h1>
+        
+        <div class="grid-info">
+            <div class="info-card">
+                <h3>Thao tác kỹ thuật lõi</h3>
+                <ul>
+                    <li>Sử dụng tổ hợp phím <code>Windows + E</code> khởi chạy File Explorer quản trị hệ thống.</li>
+                    <li>Khởi tạo cấu trúc cây thư mục phân tầng khoa học: <code>New Volume \ ThucHanh_TranMauGiaKhanh \ Tailieu</code>.</li>
+                    <li>Định hình chuẩn hóa quy tắc đặt tên file hệ thống không dấu, kết nối bằng dấu gạch dưới.</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>Quản lý vòng đời bộ nhớ</h3>
+                <ul>
+                    <li>Thực thi vòng lặp: Khởi tạo tệp tin <code>GhiChuQuanTrong.txt</code> ➔ Delete vào Recycle Bin.</li>
+                    <li>Làm chủ tính năng <code>Restore selected items</code> khôi phục tệp nguyên trạng về vùng nhớ ban đầu.</li>
+                    <li>Tối ưu hóa dung lượng ổ cứng thông qua việc làm sạch bộ nhớ tạm thời của Thùng rác.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Minh chứng báo cáo thực hành (PDF trực tiếp):</h3>
+        <iframe src="tuần 1.pdf"></iframe>
+    </div>
+</body>
+</html>

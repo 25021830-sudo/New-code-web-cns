@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gia Khánh's Academic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af; --secondary: #3b82f6; --accent: #0ea5e9;
+            --bg-color: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; --card-bg: #ffffff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        
+        header { background-color: var(--card-bg); padding: 18px 50px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03); }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+        nav ul { list-style: none; display: flex; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; padding: 6px 12px; border-radius: 8px; transition: all 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary); background: #eff6ff; font-weight: 700; }
+        
+        .hero { display: flex; align-items: center; justify-content: center; gap: 60px; padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+        .avatar-wrapper { position: relative; width: 260px; height: 260px; border-radius: 50%; padding: 8px; background: linear-gradient(135deg, var(--accent), var(--secondary)); animation: pulse-border 3s infinite; }
+        .avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 5px solid white; }
+        @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); } 70% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+        
+        .hero-content { max-width: 600px; }
+        .badge { display: inline-block; background: #e0f2fe; color: var(--secondary); padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .hero-title { font-size: 3.2rem; font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero-title span { color: var(--secondary); }
+        
+        .info-box { background: white; padding: 20px; border-radius: 16px; display: flex; gap: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); margin-bottom: 25px; border: 1px solid #f1f5f9; }
+        .info-item { display: flex; flex-direction: column; gap: 2px; }
+        .info-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        .info-value { font-weight: 700; color: var(--primary); font-size: 1.05rem; }
+        
+        .projects { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.4rem; font-weight: 800; margin-bottom: 10px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02); border: 1px solid #f1f5f9; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--accent), var(--secondary)); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08); border-color: #e2e8f0; }
+        .card:hover::before { transform: scaleX(1); }
+        
+        .card-icon { width: 50px; height: 50px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
+        .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main); }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; }
+        .card-link { color: var(--secondary); text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s; }
+        .card-link:hover { color: var(--primary); text-decoration: underline; }
+        
+        .summary-box { max-width: 850px; margin: 40px auto 20px; background: white; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.01); border: 1px solid #f1f5f9; }
+        footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.85rem; background: white; border-top: 1px solid #edf2f7; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Gia Khánh.Dev</a>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="bai1.html">Bài 1</a></li>
+                <li><a href="bai2.html">Bài 2</a></li>
+                <li><a href="bai3.html">Bài 3</a></li>
+                <li><a href="bai4.html">Bài 4</a></li>
+                <li><a href="bai5.html">Bài 5</a></li>
+                <li><a href="bai6.html">Bài 6</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="avatar-wrapper">
+            <img src="image_59833f.jpg" alt="Trần Mẫu Gia Khánh" class="avatar-img">
+        </div>
+        <div class="hero-content">
+            <div class="badge">Học phần VNU1001</div>
+            <h1 class="hero-title">Không gian số của<br><span>Trần Mẫu Gia Khánh</span></h1>
+            <div class="info-box">
+                <div class="info-item"><span class="info-label">Mã sinh viên</span><span class="info-value">25021830</span></div>
+                <div class="info-item"><span class="info-label">Lớp sinh hoạt</span><span class="info-value">K70I - CS4</span></div>
+                <div class="info-item"><span class="info-label">Viện đào tạo</span><span class="info-value">Khoa học Máy tính - UET</span></div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Hệ thống học liệu lưu trữ toàn bộ tiến trình thực hành, nghiên cứu công nghệ số và ứng dụng trí tuệ nhân tạo một cách minh bạch, trách nhiệm trong môi trường đại học.</p>
+        </div>
+    </section>
+
+    <section class="projects">
+        <div class="section-header">
+            <h2>Học phần tích hợp</h2>
+            <p style="color: var(--text-muted);">Điều hướng cấu trúc đa trang thông minh đến từng bài tập thực tế.</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div><div class="card-icon">📁</div><h3>Bài 1: Thiết bị & Quản lý file</h3><p>Xây dựng hệ thống cấu trúc cây tệp tin ThucHanh_TranMauGiaKhanh và quản lý vòng đời bộ nhớ máy tính.</p></div>
+                <a href="bai1.html" class="card-link">Khám phá chi tiết ➔</a>
+            </div>
+            <div class="card">
+                <div><div class="card-icon">🔍</div><h3>Bài 2: Nghiên cứu Mật mã ECC</h3><p>Khai thác tri thức khoa học nâng cao về ứng dụng Mật mã đường cong Elliptic trong thiết bị mạng IoT.</p></div>
+                <a href="bai2.html" class="card-link">Khám phá chi tiết ➔</a>
+            </div>
+            <div class="card">
+                <div><div class="card-icon">🤖</div><h3>Bài 3: Tối ưu hóa kỹ nghệ Prompt</h3><p>Nghiên cứu mô hình ngôn ngữ lớn qua các kỹ thuật viết câu lệnh 3 cấp độ (Cơ bản - Cải tiến - Nâng cao).</p></div>
+                <a href="bai3.html" class="card-link">Khám phá chi tiết ➔</a>
+            </div>
+            <div class="card">
+                <div><div class="card-icon">☁️</div><h3>Bài 4: Không gian cộng tác số</h3><p>Báo cáo điều phối dự án nhóm Triết học (Lớp Triết 33) trên đám mây kết hợp Miro, Docs và Sheets.</p></div>
+                <a href="bai4.html" class="card-link">Khám phá chi tiết ➔</a>
+            </div>
+            <div class="card">
+                <div><div class="card-icon">🎨</div><h3>Bài 5: Dự án truyền thông AI</h3><p>Chiến dịch truyền thông "Hội An Xanh" tích hợp đa phương tiện GenAI: Gemini, Adobe Firefly và Canva.</p></div>
+                <a href="bai5.html" class="card-link">Khám phá chi tiết ➔</a>
+            </div>
+            <div class="card">
+                <div><div class="card-icon">⚖️</div><h3>Bài 6: Liêm chính học thuật AI</h3><p>Cẩm nang khoa học về quy tắc ứng xử, đạo đức và ranh giới sử dụng công nghệ tạo sinh tại UET.</p></div>
+                <a href="bai6.html" class="card-link">Khám phá chi tiết ➔</a>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <h3 style="color: var(--primary); margin-bottom: 12px; font-weight: 700;">💡 Tuyên bố giá trị</h3>
+            <p style="color: var(--text-main); font-size: 0.95rem;">Hành trình hoàn thành Portfolio đa trang này giúp minh chứng năng lực tự học của một sinh viên Công nghệ thông tin. Việc sử dụng AI được triển khai nghiêm túc như một trợ lý tăng tốc hiệu năng, hoàn toàn không thay thế tư duy và lập luận cá nhân.</p>
+        </div>
+    </section>
+
+    <footer><p>&copy; 2026 Trần Mẫu Gia Khánh - K70I-CS4 - Trường Đại học Công nghệ (UET).</p></footer>
+</body>
+</html>

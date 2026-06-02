@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2 - Nghiên cứu Mật mã ECC cho IoT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1e40af; --secondary: #3b82f6; --bg-color: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-color); color: var(--text-main); padding: 40px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; }
+        .back-btn { display: inline-block; margin-bottom: 25px; text-decoration: none; color: var(--secondary); font-weight: 700; }
+        h1 { color: var(--primary); font-size: 2.2rem; font-weight: 800; margin-bottom: 25px; }
+        .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
+        .box { background: #f8fafc; padding: 25px; border-radius: 12px; border-top: 4px solid var(--primary); }
+        .box h3 { margin-bottom: 12px; font-size: 1.1rem; color: var(--primary); }
+        .box p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
+        iframe { width: 100%; height: 650px; border: 1px solid #e2e8f0; border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Quay lại trang chủ</a>
+        <h1>Bài 2: Khai thác dữ liệu và Đánh giá thông tin học thuật</h1>
+        
+        <div class="summary-grid">
+            <div class="box">
+                <h3>Phạm vi nghiên cứu khoa học</h3>
+                <p><strong>Chủ đề cốt lõi:</strong> Ứng dụng Mật mã đường cong Elliptic (ECC) trong bảo mật thiết bị mạng IoT hạn chế tài nguyên.</p>
+                <p><strong>Ưu điểm kỹ thuật:</strong> Đạt độ bảo mật cao vượt trội với độ dài khóa siêu ngắn (Khóa ECC 256-bit tương đương sức mạnh bảo mật của khóa RSA 3072-bit), giúp tiết kiệm tài nguyên CPU, RAM và năng lượng pin của chip vi điều khiển (ESP32, ARM Cortex-M).</p>
+            </div>
+            <div class="box">
+                <h3>Tiêu chí thẩm định tài liệu (CRAAP)</h3>
+                <p><strong>Tính cập nhật:</strong> Giới hạn dải dữ liệu từ năm 2020 - 2026 nhằm bám sát tiêu chuẩn mã hóa hậu lượng tử mới nhất của NIST.</p>
+                <p><strong>Độ tin cậy cao:</strong> Khai thác chọn lọc các công trình nghiên cứu thuộc nhóm phân hạng Q1/Q2 danh mục Scopus được xuất bản bởi IEEE, ACM, Springer.</p>
+            </div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Báo cáo học thuật chi tiết (PDF trực tiếp):</h3>
+        <iframe src="Tuần 2.pdf"></iframe>
+    </div>
+</body>
+</html>
