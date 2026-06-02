@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Portfolio | Trần Mẫu Gia Khánh</title>
     
+    <!-- Tích hợp Font chữ chuẩn Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Tích hợp thư viện Animation AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
             --primary: #0f172a;       /* Xanh Navy đậm */
-            --secondary: #3b82f6;     /* Xanh dương */
+            --secondary: #2563eb;     /* Xanh dương */
             --accent: #0ea5e9;        /* Xanh Cyan */
             --bg-color: #f8fafc;      /* Nền xám sáng */
             --card-bg: #ffffff;
             --text-main: #1e293b;
-            --text-muted: #64748b;
+            --text-muted: #475569;
             --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
@@ -30,17 +32,17 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.7;
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        /* --- HEADER & NAVBAR (Hiệu ứng kính mờ Glassmorphism) --- */
+        /* --- HEADER & NAVBAR TỐI GIẢN --- */
         header {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 16px 5%;
@@ -51,30 +53,29 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             letter-spacing: -0.5px;
         }
-
         .logo span { color: var(--secondary); }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
 
         nav a {
             text-decoration: none;
             color: var(--text-muted);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
             padding: 8px 16px;
             border-radius: 8px;
             transition: var(--transition-smooth);
@@ -83,7 +84,6 @@
         nav a:hover, nav a.active {
             color: var(--secondary);
             background: #eff6ff;
-            transform: translateY(-2px);
         }
 
         /* --- HERO SECTION --- */
@@ -92,28 +92,20 @@
             align-items: center;
             justify-content: center;
             gap: 60px;
-            min-height: 100vh;
-            padding: 100px 5% 40px;
+            padding: 140px 5% 80px;
             max-width: 1200px;
             margin: 0 auto;
             flex-wrap: wrap;
         }
 
-        /* Hiệu ứng Avatar */
         .avatar-wrapper {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             padding: 8px;
             background: linear-gradient(135deg, var(--accent), var(--secondary));
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3);
-            transition: var(--transition-smooth);
-        }
-
-        .avatar-wrapper:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
         }
 
         .avatar-img {
@@ -125,12 +117,12 @@
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 650px;
         }
 
         .badge {
             display: inline-block;
-            background: #1e293b;
+            background: var(--primary);
             color: white;
             padding: 8px 20px;
             border-radius: 30px;
@@ -139,22 +131,22 @@
             margin-bottom: 25px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 25px;
-            letter-spacing: -1.5px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: var(--primary);
+            letter-spacing: -1px;
         }
 
-        /* Chữ có hiệu ứng Gradient chuyển màu */
-        .hero-title span {
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 30px;
         }
 
         .info-grid {
@@ -166,46 +158,80 @@
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             border: 1px solid #e2e8f0;
-            margin-bottom: 30px;
         }
 
-        .info-item {
-            display: flex;
-            flex-direction: column;
+        .info-item { display: flex; flex-direction: column; }
+        .info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+        .info-value { font-weight: 800; color: var(--primary); font-size: 1.1rem; margin-top: 5px; }
+
+        /* --- ABOUT SECTION (PHẦN GIỚI THIỆU MỚI) --- */
+        .about {
+            background: white;
+            padding: 80px 5%;
+            border-top: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
         }
 
-        .info-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
         }
 
-        .info-value {
+        .about-text h2 {
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--primary);
-            font-size: 1.1rem;
+            margin-bottom: 20px;
         }
 
-        .hero-desc {
-            font-size: 1.05rem;
+        .about-text p {
             color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            color: var(--secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 1px solid #e2e8f0;
         }
 
         /* --- PROJECT GRID SECTION --- */
         .projects {
             max-width: 1250px;
             margin: 0 auto;
-            padding: 60px 5% 100px;
+            padding: 80px 5% 100px;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 50px;
+            margin-bottom: 15px;
             color: var(--primary);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
         }
 
         .grid {
@@ -214,52 +240,48 @@
             gap: 35px;
         }
 
-        /* Hiệu ứng Card 3D */
         .card {
             background: var(--card-bg);
             border-radius: 20px;
-            padding: 40px 30px;
+            padding: 35px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             border: 1px solid #e2e8f0;
             transition: var(--transition-smooth);
             display: flex;
             flex-direction: column;
             position: relative;
-            z-index: 1;
             overflow: hidden;
         }
 
         .card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 6px;
+            top: 0; left: 0; width: 100%; height: 5px;
             background: linear-gradient(90deg, var(--secondary), var(--accent));
             transform: scaleX(0);
             transform-origin: left;
             transition: var(--transition-smooth);
-            z-index: 2;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.08);
             border-color: #cbd5e1;
         }
 
-        .card:hover::after {
-            transform: scaleX(1);
-        }
+        .card:hover::after { transform: scaleX(1); }
 
         .card-icon {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             background: #eff6ff;
+            color: var(--secondary);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
             transition: var(--transition-smooth);
         }
 
@@ -270,27 +292,26 @@
         }
 
         .card h3 {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 800;
-            margin-bottom: 15px;
-            line-height: 1.4;
+            margin-bottom: 12px;
+            color: var(--primary);
         }
 
         .card p {
             flex-grow: 1;
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
-        /* Nút bấm hiệu ứng Click */
         .card-link {
             display: inline-block;
             text-align: center;
             background: var(--primary);
             color: white;
-            padding: 14px 24px;
-            border-radius: 10px;
+            padding: 12px 20px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
@@ -299,114 +320,153 @@
 
         .card-link:hover {
             background: var(--secondary);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
         }
 
-        .card-link:active {
-            transform: translateY(1px);
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: white;
+            border-top: 1px solid #e2e8f0;
         }
 
+        @media (max-width: 900px) {
+            .about-container { grid-template-columns: 1fr; }
+            .hero { padding-top: 120px; text-align: center; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo">Khánh<span>.Academic</span></a>
+        <a href="#home" class="logo">Khánh<span>.Academic</span></a>
         <nav>
             <ul>
-                <li><a href="index.html" class="active">Tổng quan</a></li>
-                <li><a href="bai1.html">Tuần 1</a></li>
-                <li><a href="bai2.html">Tuần 2</a></li>
-                <li><a href="bai3.html">Tuần 3</a></li>
-                <li><a href="bai4.html">Tuần 4</a></li>
-                <li><a href="bai5.html">Tuần 5</a></li>
-                <li><a href="bai6.html">Tuần 6</a></li>
+                <li><a href="#home">Tổng quan</a></li>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#projects">Dự án học phần</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero">
+    <!-- TRANG CHỦ -->
+    <section class="hero" id="home">
         <div class="avatar-wrapper" data-aos="zoom-in" data-aos-duration="1000">
             <img src="anh_mat.jpg" alt="Trần Mẫu Gia Khánh" class="avatar-img">
         </div>
         <div class="hero-content" data-aos="fade-left" data-aos-duration="1000">
-            <div class="badge">Lưu trữ Khoa học VNU1001</div>
-            <h1 class="hero-title">Trần Mẫu <br><span>Gia Khánh</span></h1>
+            <div class="badge">Không gian số VNU1001</div>
+            <h1 class="hero-title">Trần Mẫu Gia Khánh</h1>
+            <div class="hero-subtitle">Sinh viên Công nghệ Thông tin</div>
             
             <div class="info-grid">
                 <div class="info-item">
-                    <span class="info-label">Mã sinh viên</span>
+                    <span class="info-label">MSSV</span>
                     <span class="info-value">25021830</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Lớp học phần</span>
+                    <span class="info-label">Lớp</span>
                     <span class="info-value">K70I - CS4</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Đơn vị</span>
-                    <span class="info-value">KHMT - UET</span>
+                    <span class="info-value">UET - ĐHQGHN</span>
                 </div>
             </div>
-            
-            <p class="hero-desc">Không gian số hóa các dự án thực hành và nghiên cứu ứng dụng công nghệ thông minh. Thể hiện năng lực làm việc hệ thống, khai thác trí tuệ nhân tạo và cam kết chuẩn mực đạo đức học thuật.</p>
         </div>
     </section>
 
-    <section class="projects" id="modules">
-        <h2 class="section-title" data-aos="fade-up">Các Mô-đun Nghiên Cứu</h2>
+    <!-- PHẦN GIỚI THIỆU BẢN THÂN -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-text" data-aos="fade-right">
+                <h2>Về bản thân</h2>
+                <p>Xin chào! Mình là một cá nhân đam mê sự logic của toán học và sức mạnh của nền tảng lập trình. Tại UET, mình tập trung phát triển tư duy thuật toán thông qua Toán rời rạc và nguyên lý lập trình hướng đối tượng (Java OOP, Design Patterns) để hướng tới mục tiêu trở thành một Kỹ sư phần mềm toàn diện.</p>
+                <p>Bên cạnh học thuật, mình cân bằng cuộc sống bằng việc rèn luyện kỷ luật qua thói quen tập Gym đều đặn. Mình cũng là một fan nhiệt thành của câu lạc bộ Real Madrid và có khoảng thời gian đáng nhớ khi đảm nhiệm vai trò Lead mảng Valorant & Liên Quân Mobile cho giải đấu thể thao điện tử SGUET.</p>
+                
+                <div class="tags-container">
+                    <span class="tag">Khoa học Máy tính</span>
+                    <span class="tag">Java OOP</span>
+                    <span class="tag">Discrete Math</span>
+                    <span class="tag">eSports Organizer</span>
+                    <span class="tag">Fitness</span>
+                </div>
+            </div>
+            <div class="about-image" data-aos="fade-left">
+                <!-- Một khối thiết kế trực quan bên cạnh phần text -->
+                <div style="background: var(--bg-color); padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; text-align: center;">
+                    <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 15px;">Mục tiêu Portfolio</h3>
+                    <p style="color: var(--text-muted); font-size: 1rem;">Đây là không gian lưu trữ và hệ thống hóa minh chứng cho quá trình nghiên cứu, ứng dụng Trí tuệ nhân tạo (AI) một cách minh bạch, an toàn và có trách nhiệm trong môi trường đại học.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DANH SÁCH DỰ ÁN HỌC PHẦN -->
+    <section class="projects" id="projects">
+        <h2 class="section-title" data-aos="fade-up">Dự án Học phần</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Hệ thống 6 mô-đun bài tập thực hành môn Nhập môn Công nghệ số</p>
         
         <div class="grid">
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card" data-aos="fade-up" data-aos-delay="150">
                 <div class="card-icon">💻</div>
                 <h3>Quản trị Hệ thống</h3>
-                <p>Tổng quan về kiến trúc tổ chức cây thư mục chuẩn hóa và thực hành làm chủ vòng đời bộ nhớ tạm thời trên hệ điều hành Windows.</p>
-                <a href="bai1.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Thực hành thao tác hệ điều hành Windows, thiết lập cấu trúc cây thư mục chuẩn hóa và quản lý vòng đời tệp tin.</p>
+                <a href="bai1.html" class="card-link">Truy cập Mô-đun</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card" data-aos="fade-up" data-aos-delay="250">
                 <div class="card-icon">🔐</div>
                 <h3>Mật mã ECC (IoT)</h3>
-                <p>Khai thác Elicit/Consensus để thẩm định tài liệu khoa học về hiệu năng mã hóa đường cong Elliptic ứng dụng cho thiết bị nhúng.</p>
-                <a href="bai2.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Ứng dụng hệ thống AI phân tích tài liệu để khảo sát hiệu năng bảo mật của thuật toán đường cong Elliptic.</p>
+                <a href="bai2.html" class="card-link">Truy cập Mô-đun</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card" data-aos="fade-up" data-aos-delay="350">
                 <div class="card-icon">⚙️</div>
                 <h3>Kỹ nghệ Prompt</h3>
-                <p>Khảo sát hiệu suất của Mô hình LLM thông qua 3 cấp độ câu lệnh để phân tích chuyên sâu tài liệu Thuyết tương đối hẹp.</p>
-                <a href="bai3.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Tối ưu hóa các điểm mù của AI (Hallucination) thông qua kiến trúc lệnh 3 cấp độ và nguyên tắc 5W1H.</p>
+                <a href="bai3.html" class="card-link">Truy cập Mô-đun</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card" data-aos="fade-up" data-aos-delay="450">
                 <div class="card-icon">☁️</div>
                 <h3>Cộng tác Đám mây</h3>
-                <p>Báo cáo quản trị tiến độ và phân quyền bảo mật không gian làm việc nhóm môn Triết qua Google Workspace, Miro và Canva.</p>
-                <a href="bai4.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Quản trị ma trận phân quyền và điều phối quy trình làm việc dự án nhóm trên nền tảng trực tuyến.</p>
+                <a href="bai4.html" class="card-link">Truy cập Mô-đun</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="500">
+            <div class="card" data-aos="fade-up" data-aos-delay="550">
                 <div class="card-icon">🎨</div>
                 <h3>Sáng tạo GenAI</h3>
-                <p>Dự án Infographic "Hội An Xanh". Quy trình thiết kế đa phương tiện tích hợp giữa Google Gemini, Adobe Firefly và Canva AI.</p>
-                <a href="bai5.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Chiến dịch truyền thông "Hội An Xanh" - Kết hợp quy trình sáng tạo đa nền tảng (Gemini, Firefly, Canva).</p>
+                <a href="bai5.html" class="card-link">Truy cập Mô-đun</a>
             </div>
 
-            <div class="card" data-aos="fade-up" data-aos-delay="600">
+            <div class="card" data-aos="fade-up" data-aos-delay="650">
                 <div class="card-icon">⚖️</div>
                 <h3>Liêm chính Học thuật</h3>
-                <p>Phân tích ranh giới đạo đức số và xây dựng mô hình 6 nguyên tắc cốt lõi (UET Ethics) khi tương tác với Trí tuệ nhân tạo.</p>
-                <a href="bai6.html" class="card-link">Truy cập Mô-đun ➔</a>
+                <p>Xây dựng quy tắc đạo đức số, phân định ranh giới giữa sử dụng AI như trợ lý và gian lận công nghệ.</p>
+                <a href="bai6.html" class="card-link">Truy cập Mô-đun</a>
             </div>
         </div>
     </section>
 
+    <footer>
+        <p>&copy; 2026 Trần Mẫu Gia Khánh - Khoa học Máy tính - Trường Đại học Công nghệ (UET).</p>
+    </footer>
+
+    <!-- Thư viện AOS Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            once: true, // Animation chỉ chạy 1 lần khi cuộn tới
-            offset: 50  // Kích hoạt khi cuộn cách phần tử 50px
+            once: true, 
+            offset: 50,
+            duration: 800
         });
     </script>
 </body>
